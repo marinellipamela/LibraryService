@@ -1,0 +1,112 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "userManagement",
+    "description" : "userManagement service"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/usermanagement/v1/{id}" : {
+      "get" : {
+        "summary" : "getUserManagement",
+        "description" : "getUserManagement",
+        "operationId" : "get-usermanagement-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a userRequest to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/userRequest"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "putUserManagement",
+        "description" : "putUserManagement",
+        "operationId" : "put-usermanagement-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "type" : "string"
+          },
+          "required" : true
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "deleteUserManagement",
+        "description" : "deleteUserManagement",
+        "operationId" : "delete-usermanagement-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "userRequest" : {
+      "type" : "object",
+      "required" : [ "password", "surname", "name", "nickname", "email" ],
+      "properties" : {
+        "email" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "surname" : {
+          "type" : "string"
+        },
+        "nickname" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

@@ -14,6 +14,28 @@
     </scaext:binding>
     <scact:bindingAdjunct xmi:id="_JOlPUz8QEe23Zp_1GPXAKw" bindingName="RestService"/>
   </sca:service>
+  <sca:service xmi:id="_5mOEcj89Ee2J-voftTJUrg" name="usermanagement-v1" promote="ComponentMainUserGetPutDelete/usermanagement-v1">
+    <sca:interface.wsdl xmi:id="_5mX1cj89Ee2J-voftTJUrg" interface="http://xmlns.example.com/20220928165317PLT#wsdl.interface(usermanagement-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainUserGetPutDelete.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_5mX1cz89Ee2J-voftTJUrg" name="RestService1" path="/usermanagement/v1/{id}" docBasePath="http://localhost:7777/LibraryService" docResourcePath="userManagement" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainUserGetPutDelete-userManagement.json">
+      <operation xmi:id="_5mg_YD89Ee2J-voftTJUrg" operationName="get" nickname="get-usermanagement-v1" httpMethod="GET" notes="getUserManagement" responseStyle="element" outputPartName="userData">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_5mg_YT89Ee2J-voftTJUrg" operationName="put" nickname="put-usermanagement-v1" httpMethod="PUT" notes="putUserManagement" responseStyle="element" outputPartName="Response">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_5mg_Yj89Ee2J-voftTJUrg" operationName="delete" nickname="delete-usermanagement-v1" httpMethod="DELETE" notes="deleteUserManagement" responseStyle="element" outputPartName="msg">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_5mg_ZD89Ee2J-voftTJUrg">
+        <parameterMapping xmi:id="_5mg_ZT89Ee2J-voftTJUrg" parameterName="id" parameterType="Path" required="true"/>
+      </parameters>
+      <advancedConfig xmi:id="_5mX1dD89Ee2J-voftTJUrg" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_5mg_Yz89Ee2J-voftTJUrg" bindingName="RestService1"/>
+  </sca:service>
   <sca:property xmi:id="_homrAD8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho17kD8MEe23Zp_1GPXAKw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho60ED8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
@@ -27,6 +49,12 @@
     <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_hUBiID8MEe23Zp_1GPXAKw" processName="libraryservice.MainUser"/>
     <sca:service xmi:id="_JOSUYD8QEe23Zp_1GPXAKw" name="user-v1">
       <sca:interface.wsdl xmi:id="_JOSUYT8QEe23Zp_1GPXAKw" interface="http://xmlns.example.com/20220928110411PLT#wsdl.interface(user-v1)"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_SbFhsD89Ee2J-voftTJUrg" name="ComponentMainUserGetPutDelete" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_SbFhsT89Ee2J-voftTJUrg" processName="libraryservice.MainUserGetPutDelete"/>
+    <sca:service xmi:id="_5mOEcD89Ee2J-voftTJUrg" name="usermanagement-v1">
+      <sca:interface.wsdl xmi:id="_5mOEcT89Ee2J-voftTJUrg" interface="http://xmlns.example.com/20220928165317PLT#wsdl.interface(usermanagement-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainUserGetPutDelete.bwp"/>
     </sca:service>
   </sca:component>
 </sca:composite>
