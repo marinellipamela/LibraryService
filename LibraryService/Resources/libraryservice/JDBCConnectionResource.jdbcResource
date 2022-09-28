@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:subject="http://xsd.tns.tibco.com/trinity/models/identity/subject" xmi:id="_ZlqOoT8UEe23Zp_1GPXAKw" name="libraryservice.JDBCConnectionResource" type="jdbc:JdbcDataSource">
+  <jndi:reference xmi:id="_Zl9JkD8UEe23Zp_1GPXAKw" key="subjectJndiName" type="subject:SubjectConfiguration" value=""/>
+  <jndi:configuration xsi:type="jdbc:JdbcDataSource" xmi:id="_Zl9JkT8UEe23Zp_1GPXAKw" username="esercizio" password="#!D3rsGsMry0GF8QMR2ZAzPtW5rLYryA9S">
+    <connectionConfig xsi:type="jdbc:NonXaConnection" xmi:id="_Zl9Jkj8UEe23Zp_1GPXAKw" jdbcDriver="org.postgresql.Driver" dbURL="jdbc:postgresql://localhost:5432/DBLibrary"/>
+  </jndi:configuration>
+</jndi:namedResource>

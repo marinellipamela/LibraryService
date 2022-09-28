@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_g7cqED8MEe23Zp_1GPXAKw" targetNamespace="http://tns.tibco.com/bw/composite/LibraryService" name="LibraryService" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_JOSUYj8QEe23Zp_1GPXAKw" name="user-v1" promote="ComponentProcess/user-v1">
+    <sca:interface.wsdl xmi:id="_JObeUj8QEe23Zp_1GPXAKw" interface="http://xmlns.example.com/20220928110411PLT#wsdl.interface(user-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainUser.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_JOlPUD8QEe23Zp_1GPXAKw" name="RestService" path="/user/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="user" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainUser-user.json">
+      <operation xmi:id="_JOlPUj8QEe23Zp_1GPXAKw" operationName="post" nickname="post-user-v1" httpMethod="POST" notes="postUser" responseStyle="element" requestStyle="element" outputPartName="userResponse">
+        <responseStatus xmi:id="_XsS8cD8YEe23Zp_1GPXAKw" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <responseStatus xmi:id="_X5d1wD8YEe23Zp_1GPXAKw" statusCode="500" reasonPhrase="Internal Server Error" dataType="string"/>
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_JP76MD8QEe23Zp_1GPXAKw"/>
+      <advancedConfig xmi:id="_JOlPUT8QEe23Zp_1GPXAKw" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_JOlPUz8QEe23Zp_1GPXAKw" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_homrAD8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ho17kD8MEe23Zp_1GPXAKw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ho60ED8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_hpAToD8MEe23Zp_1GPXAKw" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_hpFMID8MEe23Zp_1GPXAKw" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_hpKEoD8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_hpNvAD8MEe23Zp_1GPXAKw" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_hpRZYD8MEe23Zp_1GPXAKw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_hpVDwD8MEe23Zp_1GPXAKw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_hUAUAD8MEe23Zp_1GPXAKw" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_hUBiID8MEe23Zp_1GPXAKw" processName="libraryservice.MainUser"/>
+    <sca:service xmi:id="_JOSUYD8QEe23Zp_1GPXAKw" name="user-v1">
+      <sca:interface.wsdl xmi:id="_JOSUYT8QEe23Zp_1GPXAKw" interface="http://xmlns.example.com/20220928110411PLT#wsdl.interface(user-v1)"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>

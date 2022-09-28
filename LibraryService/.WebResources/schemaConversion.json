@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainUser-user.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.libraryservice.com/xmlns/user/v1"
+}]}
