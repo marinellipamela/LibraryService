@@ -62,9 +62,6 @@
         },
         "password" : {
           "type" : "string"
-        },
-        "userResponse" : {
-          "$ref" : "#/definitions/userResponse"
         }
       }
     },
