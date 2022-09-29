@@ -41,9 +41,103 @@
           }
         }
       }
+    },
+    "/userbook/{id}/v1" : {
+      "get" : {
+        "summary" : "getUserBook",
+        "description" : "getUserBook",
+        "operationId" : "get-userbook-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a userBookData to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/userBookData"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "putUserBook",
+        "description" : "putUserBook",
+        "operationId" : "put-userbook-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/userBookData"
+          },
+          "required" : true
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "deleteUserBook",
+        "description" : "deleteUserBook",
+        "operationId" : "delete-userbook-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
+    "userBookData" : {
+      "type" : "object",
+      "required" : [ "stato", "note", "isbn_libro", "id_utente" ],
+      "properties" : {
+        "isbn_libro" : {
+          "type" : "string"
+        },
+        "id_utente" : {
+          "type" : "string"
+        },
+        "stato" : {
+          "type" : "string"
+        },
+        "note" : {
+          "type" : "string"
+        }
+      }
+    },
     "userBookID" : {
       "type" : "object",
       "required" : [ "id" ],
