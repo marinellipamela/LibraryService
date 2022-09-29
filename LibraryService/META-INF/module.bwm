@@ -36,6 +36,32 @@
     </scaext:binding>
     <scact:bindingAdjunct xmi:id="_5mg_Yz89Ee2J-voftTJUrg" bindingName="RestService1"/>
   </sca:service>
+  <sca:service xmi:id="_fMlOED_IEe24bYYPvZgiuQ" name="book-v1" promote="ComponentMainBook/book-v1">
+    <sca:interface.wsdl xmi:id="_fMuYAD_IEe24bYYPvZgiuQ" interface="http://xmlns.example.com/20220929092449PLT#wsdl.interface(book-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainBook.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_fMuYAT_IEe24bYYPvZgiuQ" name="RestService2" path="/book/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="book" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainBook-book.json">
+      <operation xmi:id="_fMuYAz_IEe24bYYPvZgiuQ" operationName="post" nickname="post-book-v1" httpMethod="POST" notes="postBook" responseStyle="element" requestStyle="element" outputPartName="Response">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_fM5XID_IEe24bYYPvZgiuQ"/>
+      <advancedConfig xmi:id="_fMuYAj_IEe24bYYPvZgiuQ" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_fMuYBD_IEe24bYYPvZgiuQ" bindingName="RestService2"/>
+  </sca:service>
+  <sca:service xmi:id="_AKdu8j_KEe24bYYPvZgiuQ" name="autore-v1" promote="ComponentMainAutore/autore-v1">
+    <sca:interface.wsdl xmi:id="_AKdu9j_KEe24bYYPvZgiuQ" interface="http://xmlns.example.com/20220929093009PLT#wsdl.interface(autore-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainAutore.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_AKdu9z_KEe24bYYPvZgiuQ" name="RestService3" path="/autore/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="autore" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainAutore-autore.json">
+      <operation xmi:id="_AKdu-T_KEe24bYYPvZgiuQ" operationName="post" nickname="post-autore-v1" httpMethod="POST" notes="postAutore" responseStyle="element" requestStyle="element" outputPartName="ResponseID">
+        <responseStatus xmi:id="_CQy6kD_QEe24bYYPvZgiuQ" statusCode="500" reasonPhrase="Internal Server Error" dataType="string"/>
+        <responseStatus xmi:id="_Des4Iz_QEe24bYYPvZgiuQ" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_AKdu-z_KEe24bYYPvZgiuQ"/>
+      <advancedConfig xmi:id="_AKdu-D_KEe24bYYPvZgiuQ" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_AKdu-j_KEe24bYYPvZgiuQ" bindingName="RestService3"/>
+  </sca:service>
   <sca:property xmi:id="_homrAD8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho17kD8MEe23Zp_1GPXAKw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho60ED8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
@@ -55,6 +81,18 @@
     <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_SbFhsT89Ee2J-voftTJUrg" processName="libraryservice.MainUserGetPutDelete"/>
     <sca:service xmi:id="_5mOEcD89Ee2J-voftTJUrg" name="usermanagement-v1">
       <sca:interface.wsdl xmi:id="_5mOEcT89Ee2J-voftTJUrg" interface="http://xmlns.example.com/20220928165317PLT#wsdl.interface(usermanagement-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainUserGetPutDelete.bwp"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_zbiQID_HEe24bYYPvZgiuQ" name="ComponentMainBook" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_zbiQIT_HEe24bYYPvZgiuQ" processName="libraryservice.MainBook"/>
+    <sca:service xmi:id="_fMbdED_IEe24bYYPvZgiuQ" name="book-v1">
+      <sca:interface.wsdl xmi:id="_fMbdET_IEe24bYYPvZgiuQ" interface="http://xmlns.example.com/20220929092449PLT#wsdl.interface(book-v1)"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_jCUJgD_IEe24bYYPvZgiuQ" name="ComponentMainAutore" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_jCUJgT_IEe24bYYPvZgiuQ" processName="libraryservice.MainAutore"/>
+    <sca:service xmi:id="_AKdu8D_KEe24bYYPvZgiuQ" name="autore-v1">
+      <sca:interface.wsdl xmi:id="_AKdu8T_KEe24bYYPvZgiuQ" interface="http://xmlns.example.com/20220929093009PLT#wsdl.interface(autore-v1)"/>
     </sca:service>
   </sca:component>
 </sca:composite>

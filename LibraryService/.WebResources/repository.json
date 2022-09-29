@@ -12,6 +12,14 @@
         {
             "location": "Service Descriptors/libraryservice.MainUserGetPutDelete-userManagement.json",
             "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/libraryservice.MainBook-book.json",
+            "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/libraryservice.MainAutore-autore.json",
+            "type": "generated"
         }
     ]
 }

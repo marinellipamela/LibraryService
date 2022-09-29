@@ -1,0 +1,79 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "autore",
+    "description" : "autore service"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/autore/v1" : {
+      "post" : {
+        "summary" : "postAutore",
+        "description" : "postAutore",
+        "operationId" : "post-autore-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/autore"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a IDautore to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/IDautore"
+            },
+            "headers" : { }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "IDautore" : {
+      "type" : "object",
+      "required" : [ "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "autore" : {
+      "type" : "object",
+      "required" : [ "cognome", "nome" ],
+      "properties" : {
+        "nome" : {
+          "type" : "string"
+        },
+        "cognome" : {
+          "type" : "string"
+        },
+        "pseudomino" : {
+          "type" : "string"
+        },
+        "nascita" : {
+          "type" : "string",
+          "format" : "date"
+        },
+        "luogo" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

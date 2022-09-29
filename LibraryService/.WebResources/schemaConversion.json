@@ -8,5 +8,15 @@
         "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainUserGetPutDelete-userManagement.json",
         "conversionType": "linked",
         "xsdSchemaTargetNamespace": "http://www.libraryservice.com/xmlns/user/v1"
+    },
+    {
+        "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainBook-book.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1664436339458"
+    },
+    {
+        "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainAutore-autore.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.libraryservice.com/xmlns/autore/v1"
     }
 ]}

@@ -1,0 +1,71 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "book",
+    "description" : "book service"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/book/v1" : {
+      "post" : {
+        "summary" : "postBook",
+        "description" : "postBook",
+        "operationId" : "post-book-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/book"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "book" : {
+      "type" : "object",
+      "required" : [ "descrizione", "id_autore", "titolo", "anno", "lingua", "isbn", "pagine", "casa_editrice" ],
+      "properties" : {
+        "titolo" : {
+          "type" : "string"
+        },
+        "lingua" : {
+          "type" : "string"
+        },
+        "isbn" : {
+          "type" : "string"
+        },
+        "casa_editrice" : {
+          "type" : "string"
+        },
+        "anno" : {
+          "type" : "integer"
+        },
+        "pagine" : {
+          "type" : "integer"
+        },
+        "descrizione" : {
+          "type" : "string"
+        },
+        "id_autore" : {
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}
