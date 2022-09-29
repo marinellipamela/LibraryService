@@ -18,5 +18,10 @@
         "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainAutore-autore.json",
         "conversionType": "linked",
         "xsdSchemaTargetNamespace": "http://www.libraryservice.com/xmlns/autore/v1"
+    },
+    {
+        "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainBooksGet-books.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.libraryservice.com/ListaLibri/v1"
     }
 ]}

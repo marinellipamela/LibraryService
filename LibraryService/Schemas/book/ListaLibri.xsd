@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.libraryservice.com/ListaLibri/v1" xmlns:tns="http://www.libraryservice.com/ListaLibri/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="ListaLibri">
+		<xsd:complexType>
+      		<xsd:sequence>
+				<xsd:element name="book" minOccurs="0" maxOccurs="unbounded">
+		    		<xsd:complexType>
+		      			<xsd:sequence>
+		        			<xsd:element maxOccurs="1" minOccurs="1" name="titolo" type="xsd:string"/>
+					        <xsd:element maxOccurs="1" minOccurs="1" name="lingua" type="xsd:string"/>
+					        <xsd:element maxOccurs="1" minOccurs="1" name="isbn" type="xsd:string"/>
+			                <xsd:element name="casa_editrice" type="xsd:string"/>
+			                <xsd:element name="anno" type="xsd:integer"/>
+			                <xsd:element name="pagine" type="xsd:integer"/>
+			                <xsd:element name="descrizione" type="xsd:string"/>
+			                <xsd:element name="id_autore" type="xsd:integer" minOccurs="0" maxOccurs="1"/>
+			                
+		            	</xsd:sequence>
+		    		</xsd:complexType>
+		  		</xsd:element>
+		  	</xsd:sequence>
+		  </xsd:complexType>
+	</xsd:element>
+</schema>

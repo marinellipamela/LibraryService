@@ -20,6 +20,10 @@
         {
             "location": "Service Descriptors/libraryservice.MainAutore-autore.json",
             "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/libraryservice.MainBooksGet-books.json",
+            "type": "generated"
         }
     ]
 }

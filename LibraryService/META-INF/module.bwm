@@ -64,6 +64,18 @@
     </scaext:binding>
     <scact:bindingAdjunct xmi:id="_AKdu-j_KEe24bYYPvZgiuQ" bindingName="RestService3"/>
   </sca:service>
+  <sca:service xmi:id="_HHOu8j_ZEe2Jhry2YvJa_A" name="books-v1" promote="ComponentMainBooksGet/books-v1">
+    <sca:interface.wsdl xmi:id="_HHYf8D_ZEe2Jhry2YvJa_A" interface="http://xmlns.example.com/20220929111805PLT#wsdl.interface(books-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainBooksGet.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_HHYf8T_ZEe2Jhry2YvJa_A" name="RestService4" path="/books/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="books" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainBooksGet-books.json">
+      <operation xmi:id="_HHhp4D_ZEe2Jhry2YvJa_A" operationName="get" nickname="get-books-v1" httpMethod="GET" notes="getBooks" responseStyle="element" outputPartName="ResponseBooks">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_HHhp4j_ZEe2Jhry2YvJa_A"/>
+      <advancedConfig xmi:id="_HHYf8j_ZEe2Jhry2YvJa_A" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_HHhp4T_ZEe2Jhry2YvJa_A" bindingName="RestService4"/>
+  </sca:service>
   <sca:property xmi:id="_homrAD8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho17kD8MEe23Zp_1GPXAKw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho60ED8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
@@ -95,6 +107,12 @@
     <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_jCUJgT_IEe24bYYPvZgiuQ" processName="libraryservice.MainAutore"/>
     <sca:service xmi:id="_AKdu8D_KEe24bYYPvZgiuQ" name="autore-v1">
       <sca:interface.wsdl xmi:id="_AKdu8T_KEe24bYYPvZgiuQ" interface="http://xmlns.example.com/20220929093009PLT#wsdl.interface(autore-v1)"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_n_lW8D_XEe2Jhry2YvJa_A" name="ComponentMainBooksGet" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_n_lW8T_XEe2Jhry2YvJa_A" processName="libraryservice.MainBooksGet"/>
+    <sca:service xmi:id="_HHOu8D_ZEe2Jhry2YvJa_A" name="books-v1">
+      <sca:interface.wsdl xmi:id="_HHOu8T_ZEe2Jhry2YvJa_A" interface="http://xmlns.example.com/20220929111805PLT#wsdl.interface(books-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainBooksGet.bwp"/>
     </sca:service>
   </sca:component>
 </sca:composite>
