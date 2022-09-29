@@ -14,28 +14,6 @@
     </scaext:binding>
     <scact:bindingAdjunct xmi:id="_JOlPUz8QEe23Zp_1GPXAKw" bindingName="RestService"/>
   </sca:service>
-  <sca:service xmi:id="_5mOEcj89Ee2J-voftTJUrg" name="usermanagement-v1" promote="ComponentMainUserGetPutDelete/usermanagement-v1">
-    <sca:interface.wsdl xmi:id="_5mX1cj89Ee2J-voftTJUrg" interface="http://xmlns.example.com/20220928165317PLT#wsdl.interface(usermanagement-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainUserGetPutDelete.bwp"/>
-    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_5mX1cz89Ee2J-voftTJUrg" name="RestService1" path="/usermanagement/v1/{id}" docBasePath="http://localhost:7777/LibraryService" docResourcePath="userManagement" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainUserGetPutDelete-userManagement.json">
-      <operation xmi:id="_5mg_YD89Ee2J-voftTJUrg" operationName="get" nickname="get-usermanagement-v1" httpMethod="GET" notes="getUserManagement" responseStyle="element" outputPartName="userData">
-        <clientFormat>json</clientFormat>
-        <clientRequestFormat>json</clientRequestFormat>
-      </operation>
-      <operation xmi:id="_5mg_YT89Ee2J-voftTJUrg" operationName="put" nickname="put-usermanagement-v1" httpMethod="PUT" notes="putUserManagement" responseStyle="element" outputPartName="Response">
-        <clientFormat>json</clientFormat>
-        <clientRequestFormat>json</clientRequestFormat>
-      </operation>
-      <operation xmi:id="_5mg_Yj89Ee2J-voftTJUrg" operationName="delete" nickname="delete-usermanagement-v1" httpMethod="DELETE" notes="deleteUserManagement" responseStyle="element" outputPartName="msg">
-        <clientFormat>json</clientFormat>
-        <clientRequestFormat>json</clientRequestFormat>
-      </operation>
-      <parameters xmi:id="_D-_FcD_2Ee2Jhry2YvJa_A">
-        <parameterMapping xmi:id="_D-_FcT_2Ee2Jhry2YvJa_A" parameterName="id" parameterType="Path" dataType="string" required="true"/>
-      </parameters>
-      <advancedConfig xmi:id="_5mX1dD89Ee2J-voftTJUrg" blockingQueueSize="2147483647"/>
-    </scaext:binding>
-    <scact:bindingAdjunct xmi:id="_5mg_Yz89Ee2J-voftTJUrg" bindingName="RestService1"/>
-  </sca:service>
   <sca:service xmi:id="_fMlOED_IEe24bYYPvZgiuQ" name="book-v1" promote="ComponentMainBook/book-v1">
     <sca:interface.wsdl xmi:id="_fMuYAD_IEe24bYYPvZgiuQ" interface="http://xmlns.example.com/20220929092449PLT#wsdl.interface(book-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainBook.bwp"/>
     <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_fMuYAT_IEe24bYYPvZgiuQ" name="RestService2" path="/book/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="book" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainBook-book.json">
@@ -90,6 +68,34 @@
     </scaext:binding>
     <scact:bindingAdjunct xmi:id="_dQ9-gT_fEe2Jhry2YvJa_A" bindingName="RestService5"/>
   </sca:service>
+  <sca:service xmi:id="_0MybMj_5Ee2Jhry2YvJa_A" name="user-v11" promote="ComponentProcess/user-v11">
+    <sca:interface.wsdl xmi:id="_0MybNj_5Ee2Jhry2YvJa_A" interface="http://xmlns.example.com/20220928110411PLT#wsdl.interface(user-v12)" scaext:wsdlLocation="../Processes/libraryservice/MainUser.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_0MybNz_5Ee2Jhry2YvJa_A" name="RestService6" path="/user/{id}/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="user" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainUser-user.json">
+      <operation xmi:id="_0MybOT_5Ee2Jhry2YvJa_A" operationName="get" nickname="get-user-v1" httpMethod="GET" notes="getUser" responseStyle="element" outputPartName="ResponseDataUser">
+        <responseStatus xmi:id="_SYYQED_6Ee2Jhry2YvJa_A" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <responseStatus xmi:id="_See4ED_6Ee2Jhry2YvJa_A" statusCode="500" reasonPhrase="Internal Server Error" dataType="string"/>
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_0MybOj_5Ee2Jhry2YvJa_A" operationName="put" nickname="put-user-v1" httpMethod="PUT" notes="putUser" responseStyle="element" requestStyle="element" outputPartName="msg">
+        <responseStatus xmi:id="_UGUYkD_6Ee2Jhry2YvJa_A" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <responseStatus xmi:id="_ULd-UD_6Ee2Jhry2YvJa_A" statusCode="500" reasonPhrase="Internal Server Error" dataType="string"/>
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_0MybOz_5Ee2Jhry2YvJa_A" operationName="delete" nickname="delete-user-v1" httpMethod="DELETE" notes="deleteUser" responseStyle="element" outputPartName="msg">
+        <responseStatus xmi:id="_VKfLUD_6Ee2Jhry2YvJa_A" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <responseStatus xmi:id="_VOhWwD_6Ee2Jhry2YvJa_A" statusCode="500" reasonPhrase="Internal Server Error" dataType="string"/>
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_0NY4ID_5Ee2Jhry2YvJa_A">
+        <parameterMapping xmi:id="_0NY4IT_5Ee2Jhry2YvJa_A" parameterName="id" parameterType="Path" required="true"/>
+      </parameters>
+      <advancedConfig xmi:id="_0MybOD_5Ee2Jhry2YvJa_A" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_0MybPD_5Ee2Jhry2YvJa_A" bindingName="RestService6"/>
+  </sca:service>
   <sca:property xmi:id="_homrAD8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho17kD8MEe23Zp_1GPXAKw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho60ED8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
@@ -99,16 +105,14 @@
   <sca:property xmi:id="_hpNvAD8MEe23Zp_1GPXAKw" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_hpRZYD8MEe23Zp_1GPXAKw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_hpVDwD8MEe23Zp_1GPXAKw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_H_FnYEACEe2Jhry2YvJa_A" name="BW.HOST.NAME1" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
   <sca:component xmi:id="_hUAUAD8MEe23Zp_1GPXAKw" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
     <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_hUBiID8MEe23Zp_1GPXAKw" processName="libraryservice.MainUser"/>
     <sca:service xmi:id="_JOSUYD8QEe23Zp_1GPXAKw" name="user-v1">
       <sca:interface.wsdl xmi:id="_JOSUYT8QEe23Zp_1GPXAKw" interface="http://xmlns.example.com/20220928110411PLT#wsdl.interface(user-v1)"/>
     </sca:service>
-  </sca:component>
-  <sca:component xmi:id="_SbFhsD89Ee2J-voftTJUrg" name="ComponentMainUserGetPutDelete" compositeext:version="1.0.0.qualifier">
-    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_SbFhsT89Ee2J-voftTJUrg" processName="libraryservice.MainUserGetPutDelete"/>
-    <sca:service xmi:id="_5mOEcD89Ee2J-voftTJUrg" name="usermanagement-v1">
-      <sca:interface.wsdl xmi:id="_5mOEcT89Ee2J-voftTJUrg" interface="http://xmlns.example.com/20220928165317PLT#wsdl.interface(usermanagement-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainUserGetPutDelete.bwp"/>
+    <sca:service xmi:id="_0MybMD_5Ee2Jhry2YvJa_A" name="user-v11">
+      <sca:interface.wsdl xmi:id="_0MybMT_5Ee2Jhry2YvJa_A" interface="http://xmlns.example.com/20220928110411PLT#wsdl.interface(user-v12)"/>
     </sca:service>
   </sca:component>
   <sca:component xmi:id="_zbiQID_HEe24bYYPvZgiuQ" name="ComponentMainBook" compositeext:version="1.0.0.qualifier">

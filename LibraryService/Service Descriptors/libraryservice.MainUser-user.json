@@ -5,7 +5,7 @@
     "title" : "user",
     "description" : "user service"
   },
-  "host" : "localhost:8080",
+  "host" : "0.0.0.0:8080",
   "basePath" : "/",
   "schemes" : [ "http" ],
   "paths" : {
@@ -41,9 +41,126 @@
           }
         }
       }
+    },
+    "/user/{id}/v1" : {
+      "get" : {
+        "summary" : "getUser",
+        "description" : "getUser",
+        "operationId" : "get-user-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a userRequest to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/userRequest"
+            },
+            "headers" : { }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "putUser",
+        "description" : "putUser",
+        "operationId" : "put-user-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/userData"
+          },
+          "required" : true
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "string"
+            },
+            "headers" : { }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "deleteUser",
+        "description" : "deleteUser",
+        "operationId" : "delete-user-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "string"
+            },
+            "headers" : { }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {
+    "userData" : {
+      "type" : "object",
+      "properties" : {
+        "email" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "surname" : {
+          "type" : "string"
+        },
+        "nickname" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      }
+    },
     "userRequest" : {
       "type" : "object",
       "required" : [ "password", "surname", "name", "nickname", "email" ],

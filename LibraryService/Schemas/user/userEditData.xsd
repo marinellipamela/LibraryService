@@ -4,6 +4,18 @@
 	<xsd:element name="userData">
     <xsd:complexType>
       <xsd:sequence>
+      	<xsd:element maxOccurs="1" minOccurs="0" name="email" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="name" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="surname" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="nickname" type="xsd:string"/>
+        <xsd:element maxOccurs="1" minOccurs="0" name="password" type="xsd:string"/>
+       </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <xsd:element name="userDataID">
+    <xsd:complexType>
+      <xsd:sequence>
       	<xsd:element maxOccurs="1" minOccurs="1" name="id" type="xsd:int"/>
       	<xsd:element maxOccurs="1" minOccurs="0" name="email" type="xsd:string"/>
         <xsd:element maxOccurs="1" minOccurs="0" name="name" type="xsd:string"/>
@@ -13,6 +25,7 @@
        </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
+  
   
 </schema>
 
