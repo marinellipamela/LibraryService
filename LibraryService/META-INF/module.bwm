@@ -40,6 +40,8 @@
     <sca:interface.wsdl xmi:id="_fMuYAD_IEe24bYYPvZgiuQ" interface="http://xmlns.example.com/20220929092449PLT#wsdl.interface(book-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainBook.bwp"/>
     <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_fMuYAT_IEe24bYYPvZgiuQ" name="RestService2" path="/book/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="book" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainBook-book.json">
       <operation xmi:id="_fMuYAz_IEe24bYYPvZgiuQ" operationName="post" nickname="post-book-v1" httpMethod="POST" notes="postBook" responseStyle="element" requestStyle="element" outputPartName="Response">
+        <responseStatus xmi:id="_ecuIUD_REe24bYYPvZgiuQ" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <responseStatus xmi:id="_eiG-oD_REe24bYYPvZgiuQ" statusCode="500" reasonPhrase="Internal Server Error" dataType="string"/>
         <clientFormat>json</clientFormat>
         <clientRequestFormat>json</clientRequestFormat>
       </operation>

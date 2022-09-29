@@ -10,7 +10,10 @@
                 <xsd:element name="anno" type="xsd:integer"/>
                 <xsd:element name="pagine" type="xsd:integer"/>
                 <xsd:element name="descrizione" type="xsd:string"/>
-                <xsd:element name="id_autore" type="xsd:integer"/>
+                <xsd:element name="id_autore" type="xsd:integer" minOccurs="0" maxOccurs="1"/>
+                <xsd:element name="nome_autore" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:element name="cognome_autore" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+                <xsd:element name="pseudomino_autore" type="xsd:string" minOccurs="0" maxOccurs="1"/>
             </xsd:sequence>
     </xsd:complexType>
   </xsd:element>

@@ -30,6 +30,13 @@
             "description" : "a string to be returned",
             "schema" : {
               "type" : "string"
+            },
+            "headers" : { }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "type" : "string"
             }
           }
         }
@@ -39,7 +46,7 @@
   "definitions" : {
     "book" : {
       "type" : "object",
-      "required" : [ "descrizione", "id_autore", "titolo", "anno", "lingua", "isbn", "pagine", "casa_editrice" ],
+      "required" : [ "descrizione", "titolo", "anno", "lingua", "isbn", "pagine", "casa_editrice" ],
       "properties" : {
         "titolo" : {
           "type" : "string"
@@ -64,6 +71,15 @@
         },
         "id_autore" : {
           "type" : "integer"
+        },
+        "nome_autore" : {
+          "type" : "string"
+        },
+        "cognome_autore" : {
+          "type" : "string"
+        },
+        "pseudomino_autore" : {
+          "type" : "string"
         }
       }
     }
