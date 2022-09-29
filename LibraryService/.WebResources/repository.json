@@ -24,6 +24,10 @@
         {
             "location": "Service Descriptors/libraryservice.MainBooksGet-books.json",
             "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/libraryservice.MainUserBook-userBook.json",
+            "type": "generated"
         }
     ]
 }

@@ -23,5 +23,15 @@
         "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainBooksGet-books.json",
         "conversionType": "linked",
         "xsdSchemaTargetNamespace": "http://www.libraryservice.com/ListaLibri/v1"
+    },
+    {
+        "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainUserBook-userBook.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.libraryservice.com/requestUserBook/v1"
+    },
+    {
+        "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainUserBook-userBook.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.libraryservice.com/userBook/v1"
     }
 ]}

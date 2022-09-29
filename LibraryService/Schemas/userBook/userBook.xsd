@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.libraryservice.com/userBook/v1" xmlns:tns="http://www.libraryservice.com/userBook/v1" elementFormDefault="qualified">
+	
+	<xsd:element name="userBookData"> <!-- save -->
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="isbn_libro" type="xsd:string"/>
+				<xsd:element name="id_utente" type="xsd:string"/>
+				<xsd:element name="stato" type="xsd:string"/>
+				<xsd:element name="note" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="userBookID"> <!-- get -->
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="id" type="xsd:integer"/>
+			</xsd:sequence>
+		
+		</xsd:complexType>
+	</xsd:element>
+	
+</schema>

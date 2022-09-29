@@ -1,0 +1,75 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "userBook",
+    "description" : "userBook service"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/userbook/v1" : {
+      "post" : {
+        "summary" : "postUserBook",
+        "description" : "postUserBook",
+        "operationId" : "post-userbook-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/RequestUserBookData"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a userBookID to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/userBookID"
+            },
+            "headers" : { }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "userBookID" : {
+      "type" : "object",
+      "required" : [ "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "RequestUserBookData" : {
+      "type" : "object",
+      "required" : [ "stato", "note", "titolo_libro", "email_utente" ],
+      "properties" : {
+        "titolo_libro" : {
+          "type" : "string"
+        },
+        "email_utente" : {
+          "type" : "string"
+        },
+        "stato" : {
+          "type" : "string"
+        },
+        "note" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

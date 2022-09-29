@@ -76,6 +76,20 @@
     </scaext:binding>
     <scact:bindingAdjunct xmi:id="_HHhp4T_ZEe2Jhry2YvJa_A" bindingName="RestService4"/>
   </sca:service>
+  <sca:service xmi:id="_dQ5tED_fEe2Jhry2YvJa_A" name="userbook-v1" promote="ComponentMainUserBook/userbook-v1">
+    <sca:interface.wsdl xmi:id="_dQ6UID_fEe2Jhry2YvJa_A" interface="http://xmlns.example.com/20220929115536PLT#wsdl.interface(userbook-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainUserBook.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_dQ6UIT_fEe2Jhry2YvJa_A" name="RestService5" path="/userbook/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="userBook" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainUserBook-userBook.json">
+      <operation xmi:id="_dQ9-gD_fEe2Jhry2YvJa_A" operationName="post" nickname="post-userbook-v1" httpMethod="POST" notes="postUserBook" responseStyle="element" requestStyle="element" outputPartName="ResponseID">
+        <responseStatus xmi:id="__Vpk0D_fEe2Jhry2YvJa_A" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <responseStatus xmi:id="__cYe8D_fEe2Jhry2YvJa_A" statusCode="500" reasonPhrase="Internal Server Error" dataType="string"/>
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_dQ-lkD_fEe2Jhry2YvJa_A"/>
+      <advancedConfig xmi:id="_dQ6UIj_fEe2Jhry2YvJa_A" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_dQ9-gT_fEe2Jhry2YvJa_A" bindingName="RestService5"/>
+  </sca:service>
   <sca:property xmi:id="_homrAD8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho17kD8MEe23Zp_1GPXAKw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho60ED8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
@@ -112,7 +126,13 @@
   <sca:component xmi:id="_n_lW8D_XEe2Jhry2YvJa_A" name="ComponentMainBooksGet" compositeext:version="1.0.0.qualifier">
     <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_n_lW8T_XEe2Jhry2YvJa_A" processName="libraryservice.MainBooksGet"/>
     <sca:service xmi:id="_HHOu8D_ZEe2Jhry2YvJa_A" name="books-v1">
-      <sca:interface.wsdl xmi:id="_HHOu8T_ZEe2Jhry2YvJa_A" interface="http://xmlns.example.com/20220929111805PLT#wsdl.interface(books-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainBooksGet.bwp"/>
+      <sca:interface.wsdl xmi:id="_HHOu8T_ZEe2Jhry2YvJa_A" interface="http://xmlns.example.com/20220929111805PLT#wsdl.interface(books-v1)"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_3aRxED_cEe2Jhry2YvJa_A" name="ComponentMainUserBook" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_3aRxET_cEe2Jhry2YvJa_A" processName="libraryservice.MainUserBook"/>
+    <sca:service xmi:id="_dQ5GAD_fEe2Jhry2YvJa_A" name="userbook-v1">
+      <sca:interface.wsdl xmi:id="_dQ5GAT_fEe2Jhry2YvJa_A" interface="http://xmlns.example.com/20220929115536PLT#wsdl.interface(userbook-v1)"/>
     </sca:service>
   </sca:component>
 </sca:composite>
