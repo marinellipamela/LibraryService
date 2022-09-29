@@ -29,8 +29,8 @@
         <clientFormat>json</clientFormat>
         <clientRequestFormat>json</clientRequestFormat>
       </operation>
-      <parameters xmi:id="_5mg_ZD89Ee2J-voftTJUrg">
-        <parameterMapping xmi:id="_5mg_ZT89Ee2J-voftTJUrg" parameterName="id" parameterType="Path" required="true"/>
+      <parameters xmi:id="_D-_FcD_2Ee2Jhry2YvJa_A">
+        <parameterMapping xmi:id="_D-_FcT_2Ee2Jhry2YvJa_A" parameterName="id" parameterType="Path" dataType="string" required="true"/>
       </parameters>
       <advancedConfig xmi:id="_5mX1dD89Ee2J-voftTJUrg" blockingQueueSize="2147483647"/>
     </scaext:binding>

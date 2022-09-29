@@ -33,5 +33,10 @@
         "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainUserBook-userBook.json",
         "conversionType": "linked",
         "xsdSchemaTargetNamespace": "http://www.libraryservice.com/userBook/v1"
+    },
+    {
+        "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainUser-user.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.example.org/userEditData"
     }
 ]}
