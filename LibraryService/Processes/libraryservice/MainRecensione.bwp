@@ -2737,8 +2737,7 @@
             name="Reply3-input" sca-bpel:internal="true"/>
         <bpws:variable messageType="ns0:delete5XXFaultMessage"
             name="Reply4-input" sca-bpel:internal="true"/>
-        <bpws:variable element="ns2:idRecensione"
-            name="CallProcess-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns2:idRecensione" name="DeleteRec-input" sca-bpel:internal="true"/>
         <bpws:variable name="FaultName3" sca-bpel:internal="true" type="xsd:string"/>
         <bpws:variable element="ns:FaultDetail" name="FaultDetails2" sca-bpel:internal="true"/>
         <bpws:variable element="ns1:ActivityInput" name="Log8-input" sca-bpel:internal="true"/>
@@ -3365,8 +3364,8 @@
                                 <tibex:extActivity
                                     expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/recensione/parameters&quot; xmlns:tns3=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;delete&quot;/>&lt;xsl:template name=&quot;CallProcess-input&quot; match=&quot;/&quot;>&lt;tns3:idRecensione>&lt;xsl:value-of select=&quot;xsd:int($delete/parameters/tns:recensione-v11DeleteParameters/tns:id)&quot;/>&lt;/tns3:idRecensione>&lt;/xsl:template>&lt;/xsl:stylesheet>"
                                     expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
-                                    inputVariable="CallProcess-input"
-                                    name="CallProcess"
+                                    inputVariable="DeleteRec-input"
+                                    name="DeleteRec"
                                     tibex:xpdlId="206ee98a-63af-404b-9d20-90ea97504094"
                                     type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
                                     <bpws:targets>
@@ -3376,7 +3375,7 @@
                                     <bpws:source linkName="CallProcessToLog6"/>
                                     <bpws:source
                                     linkName="CallProcessToReply4"
-                                    tibex:faultDetailsVar="CallProcess" tibex:faultNameVar="FaultName">
+                                    tibex:faultDetailsVar="DeleteRec" tibex:faultNameVar="FaultName">
                                     <tibex:DesignExpression>
                                     <tibex:expression
                                     expression="##error##" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0"/>
