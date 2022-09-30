@@ -1,0 +1,88 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "kindBook",
+    "description" : "kindBook service"
+  },
+  "host" : "0.0.0.0:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/kindbook/{nome_genere}/v1" : {
+      "get" : {
+        "summary" : "getKindBook",
+        "description" : "getKindBook",
+        "operationId" : "get-kindbook-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "nome_genere",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a ListaLibri to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/ListaLibri"
+            },
+            "headers" : { }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "ListaLibri" : {
+      "type" : "object",
+      "properties" : {
+        "book" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/book",
+            "uniqueItems" : false
+          }
+        }
+      }
+    },
+    "book" : {
+      "type" : "object",
+      "required" : [ "descrizione", "titolo", "anno", "lingua", "isbn", "pagine", "casa_editrice" ],
+      "properties" : {
+        "titolo" : {
+          "type" : "string"
+        },
+        "lingua" : {
+          "type" : "string"
+        },
+        "isbn" : {
+          "type" : "string"
+        },
+        "casa_editrice" : {
+          "type" : "string"
+        },
+        "anno" : {
+          "type" : "integer"
+        },
+        "pagine" : {
+          "type" : "integer"
+        },
+        "descrizione" : {
+          "type" : "string"
+        },
+        "id_autore" : {
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}

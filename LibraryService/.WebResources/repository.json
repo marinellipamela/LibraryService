@@ -28,6 +28,14 @@
         {
             "location": "Service Descriptors/libraryservice.MainUserBook-userBook.json",
             "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/libraryservice.MainKindBook-kindBook.json",
+            "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/libraryservice.MainRecensione-recensione.json",
+            "type": "generated"
         }
     ]
 }

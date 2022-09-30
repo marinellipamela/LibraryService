@@ -38,5 +38,15 @@
         "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainUser-user.json",
         "conversionType": "linked",
         "xsdSchemaTargetNamespace": "http://www.example.org/userEditData"
+    },
+    {
+        "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainKindBook-kindBook.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.libraryservice.com/ListaLibri/v1"
+    },
+    {
+        "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainRecensione-recensione.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.libraryservice.com/RequestRecensione/v1"
     }
 ]}
