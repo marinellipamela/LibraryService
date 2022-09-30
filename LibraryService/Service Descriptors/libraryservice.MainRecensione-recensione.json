@@ -61,13 +61,6 @@
             "description" : "a recensioneDataRequest to be returned",
             "schema" : {
               "$ref" : "#/definitions/recensioneDataRequest"
-            },
-            "headers" : { }
-          },
-          "500" : {
-            "description" : "Internal Server Error",
-            "schema" : {
-              "type" : "string"
             }
           }
         }
@@ -88,13 +81,6 @@
         "responses" : {
           "200" : {
             "description" : "a string to be returned",
-            "schema" : {
-              "type" : "string"
-            },
-            "headers" : { }
-          },
-          "500" : {
-            "description" : "Internal Server Error",
             "schema" : {
               "type" : "string"
             }

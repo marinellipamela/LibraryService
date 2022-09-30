@@ -36,6 +36,10 @@
         {
             "location": "Service Descriptors/libraryservice.MainRecensione-recensione.json",
             "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/libraryservice.MainGenereAutore-genereAutore.json",
+            "type": "generated"
         }
     ]
 }

@@ -206,6 +206,9 @@
             <plnk:partnerLinkType name="partnerLinkType1">
                 <plnk:role name="use" portType="tns:recensione-v11"/>
             </plnk:partnerLinkType>
+            <plnk:partnerLinkType name="partnerLinkType2">
+                <plnk:role name="use" portType="tns:recensione-v12"/>
+            </plnk:partnerLinkType>
             <wsdl:import namespace="http://tns.tibco.com/bw/REST"/>
             <wsdl:import namespace="http://www.libraryservice.com/RequestRecensione/v1"/>
             <wsdl:import namespace="http://xmlns.example.com/recensione/parameters"/>
@@ -272,6 +275,39 @@
                     tibex:reasonPhrase="Internal Server Error"
                     tibex:statusCode="500" type="xsd:string"/>
             </wsdl:message>
+            <wsdl:message name="getRequest1">
+                <wsdl:part element="extns:httpHeaders"
+                    name="httpHeaders" tibex:source="bw.rest"/>
+                <wsdl:part element="extns2:recensione-v12GetParameters"
+                    name="parameters" tibex:source="bw.rest"/>
+            </wsdl:message>
+            <wsdl:message name="getResponse1">
+                <wsdl:part element="extns1:recensioneDataRequest"
+                    name="item" tibex:hasMultipleNamespaces="false"/>
+            </wsdl:message>
+            <wsdl:message name="get4XXFaultMessage1">
+                <wsdl:part element="extns:client4XXError" name="clientError"/>
+            </wsdl:message>
+            <wsdl:message name="get5XXFaultMessage1">
+                <wsdl:part element="extns:server5XXError" name="serverError"/>
+            </wsdl:message>
+            <wsdl:message name="deleteRequest1">
+                <wsdl:part element="extns:httpHeaders"
+                    name="httpHeaders" tibex:source="bw.rest"/>
+                <wsdl:part
+                    element="extns2:recensione-v12DeleteParameters"
+                    name="parameters" tibex:source="bw.rest"/>
+            </wsdl:message>
+            <wsdl:message name="deleteResponse1">
+                <wsdl:part name="msg"
+                    tibex:hasMultipleNamespaces="false" type="xsd:string"/>
+            </wsdl:message>
+            <wsdl:message name="delete4XXFaultMessage1">
+                <wsdl:part element="extns:client4XXError" name="clientError"/>
+            </wsdl:message>
+            <wsdl:message name="delete5XXFaultMessage1">
+                <wsdl:part element="extns:server5XXError" name="serverError"/>
+            </wsdl:message>
             <wsdl:portType name="recensione-v1"
                 tibex:bw.rest.apipath="/recensione/v1"
                 tibex:bw.rest.basepath="recensione"
@@ -318,6 +354,27 @@
                     <wsdl:fault message="tns:delete500FaultMessage" name="server-500-Fault"/>
                 </wsdl:operation>
             </wsdl:portType>
+            <wsdl:portType name="recensione-v12"
+                tibex:bw.rest.apipath="/recensione/{id}/v1"
+                tibex:bw.rest.basepath="recensione"
+                tibex:bw.rest.resource="Service Descriptors/libraryservice.MainRecensione-recensione.json"
+                tibex:bw.rest.resource.source="generated" tibex:source="bw.rest.service">
+                <wsdl:documentation>recensione man service</wsdl:documentation>
+                <wsdl:operation name="get">
+                    <wsdl:documentation>getRecensione</wsdl:documentation>
+                    <wsdl:input message="tns:getRequest1" name="getInput"/>
+                    <wsdl:output message="tns:getResponse1" name="getOutput"/>
+                    <wsdl:fault message="tns:get4XXFaultMessage1" name="clientFault"/>
+                    <wsdl:fault message="tns:get5XXFaultMessage1" name="serverFault"/>
+                </wsdl:operation>
+                <wsdl:operation name="delete">
+                    <wsdl:documentation>deleteRecensione</wsdl:documentation>
+                    <wsdl:input message="tns:deleteRequest1" name="deleteInput"/>
+                    <wsdl:output message="tns:deleteResponse1" name="deleteOutput"/>
+                    <wsdl:fault message="tns:delete4XXFaultMessage1" name="clientFault"/>
+                    <wsdl:fault message="tns:delete5XXFaultMessage1" name="serverFault"/>
+                </wsdl:operation>
+            </wsdl:portType>
         </wsdl:definitions>
     </tibex:Types>
     <tibex:ProcessInfo callable="false" createdBy="Pamela"
@@ -362,37 +419,6 @@
                     <styles xsi:type="bwnotation:BackgroundStyle"/>
                     <styles xsi:type="bwnotation:ResizingStyle"/>
                     <element href="//0/@process/@partnerLinks/@children.0"/>
-                    <layoutConstraint xsi:type="notation:Bounds"/>
-                </children>
-                <children type="4001">
-                    <children type="40011"/>
-                    <children type="3006">
-                        <styles xsi:type="notation:DrawerStyle"/>
-                        <styles xsi:type="notation:SortingStyle"/>
-                        <styles xsi:type="notation:FilteringStyle"/>
-                        <styles xsi:type="bwnotation:BackgroundStyle"/>
-                        <styles xsi:type="bwnotation:ResizingStyle"/>
-                    </children>
-                    <children type="4017">
-                        <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
-                        <layoutConstraint xsi:type="notation:Bounds"/>
-                    </children>
-                    <children type="4017">
-                        <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
-                        <layoutConstraint xsi:type="notation:Bounds"/>
-                    </children>
-                    <children type="4017">
-                        <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
-                        <layoutConstraint xsi:type="notation:Bounds"/>
-                    </children>
-                    <children type="4017">
-                        <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
-                        <layoutConstraint xsi:type="notation:Bounds"/>
-                    </children>
-                    <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
-                    <styles xsi:type="bwnotation:BackgroundStyle"/>
-                    <styles xsi:type="bwnotation:ResizingStyle"/>
-                    <element href="//0/@process/@partnerLinks/@children.1"/>
                     <layoutConstraint xsi:type="notation:Bounds"/>
                 </children>
                 <styles xsi:type="notation:SortingStyle"/>
@@ -1102,10 +1128,13 @@
                                     fontName="Segoe UI"
                                     lineColor="0" xsi:type="notation:ShapeStyle"/>
                                     <styles xsi:type="bwnotation:BackgroundStyle"/>
-                                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                                    <styles
+                                    restoreHeight="442"
+                                    restoreWidth="779"
+                                    restoreX="2" xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0"/>
                                     <layoutConstraint
-                                    height="440"
+                                    height="442"
                                     width="779"
                                     x="2" xsi:type="notation:Bounds"/>
                                     </children>
@@ -1478,7 +1507,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity"/>
 
                                     <layoutConstraint
-                                    height="229"
+                                    height="230"
                                     width="677"
                                     x="15" xsi:type="notation:Bounds"/>
                                     </children>
@@ -1697,7 +1726,7 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.1/@activity"/>
 
                                     <layoutConstraint
-                                    height="465"
+                                    height="431"
                                     width="717" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -1753,16 +1782,16 @@
                                     lineColor="0" xsi:type="notation:ShapeStyle"/>
                                     <styles xsi:type="bwnotation:BackgroundStyle"/>
                                     <styles
-                                    restoreHeight="290"
-                                    restoreWidth="779"
+                                    restoreHeight="453"
+                                    restoreWidth="792"
                                     restoreX="2"
-                                    restoreY="473" xsi:type="bwnotation:ResizingStyle"/>
+                                    restoreY="21" xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.1"/>
                                     <layoutConstraint
-                                    height="484"
-                                    width="779"
+                                    height="452"
+                                    width="792"
                                     x="2"
-                                    xsi:type="notation:Bounds" y="442"/>
+                                    xsi:type="notation:Bounds" y="441"/>
                                     </children>
                                     <children type="4011">
                                     <children type="3012">
@@ -2407,13 +2436,17 @@
                                     fontName="Segoe UI"
                                     lineColor="0" xsi:type="notation:ShapeStyle"/>
                                     <styles xsi:type="bwnotation:BackgroundStyle"/>
-                                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                                    <styles
+                                    restoreHeight="465"
+                                    restoreWidth="792"
+                                    restoreX="2"
+                                    restoreY="42" xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.2"/>
                                     <layoutConstraint
-                                    height="462"
-                                    width="779"
+                                    height="458"
+                                    width="792"
                                     x="2"
-                                    xsi:type="notation:Bounds" y="932"/>
+                                    xsi:type="notation:Bounds" y="892"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
@@ -2424,7 +2457,7 @@
                                     <styles xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0"/>
                                     <layoutConstraint
-                                    height="1425"
+                                    height="1380"
                                     width="741" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:DrawerStyle"/>
@@ -2439,8 +2472,8 @@
                                     gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
                                     <styles xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity"/>
-                                    <layoutConstraint height="1582"
-                                    width="808" xsi:type="notation:Bounds"/>
+                                    <layoutConstraint height="1505"
+                                    width="821" xsi:type="notation:Bounds"/>
                                 </children>
                                 <styles xsi:type="notation:SortingStyle"/>
                                 <styles xsi:type="notation:FilteringStyle"/>
@@ -2449,7 +2482,7 @@
                             <styles xsi:type="bwnotation:BackgroundStyle"/>
                             <styles xsi:type="bwnotation:ResizingStyle"/>
                             <element href="//0/@process/@activity"/>
-                            <layoutConstraint height="1582" width="811" xsi:type="notation:Bounds"/>
+                            <layoutConstraint height="1505" width="824" xsi:type="notation:Bounds"/>
                         </children>
                         <styles xsi:type="notation:SortingStyle"/>
                         <styles xsi:type="notation:FilteringStyle"/>
@@ -2459,7 +2492,7 @@
                     <styles xsi:type="bwnotation:BackgroundStyle"/>
                     <styles xsi:type="bwnotation:ResizingStyle"/>
                     <element href="//0/@process/@activity"/>
-                    <layoutConstraint height="1606" width="811" x="1"
+                    <layoutConstraint height="1529" width="824" x="1"
                         xsi:type="notation:Bounds" y="1"/>
                 </children>
                 <styles xsi:type="notation:SortingStyle"/>
@@ -2468,7 +2501,7 @@
             </children>
             <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
             <element href="//0/@process"/>
-            <layoutConstraint height="1559" width="1153" xsi:type="notation:Bounds"/>
+            <layoutConstraint height="1581" width="1166" xsi:type="notation:Bounds"/>
         </children>
         <styles xsi:type="notation:DiagramStyle"/>
         <element href="//0"/>
@@ -2681,6 +2714,8 @@
             namespace="http://www.libraryservice.com/RequestRecensione/v1" prefix="tns3"/>
         <tibex:namespaceItem
             namespace="http://www.w3.org/2001/XMLSchema" prefix="xsd"/>
+        <tibex:namespaceItem
+            namespace="http://xmlns.example.com/recensione/parameters" prefix="tns4"/>
     </tibex:NamespaceRegistry>
     <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://tns.tibco.com/bw/REST"/>
     <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.libraryservice.com/RequestRecensione/v1"/>
@@ -2690,7 +2725,7 @@
             partnerLinkType="ns0:partnerLinkType"
             sca-bpel:ignore="false" sca-bpel:service="recensione-v1"/>
         <bpws:partnerLink myRole="use" name="recensione-v11"
-            partnerLinkType="ns0:partnerLinkType1"
+            partnerLinkType="ns0:partnerLinkType2"
             sca-bpel:ignore="false" sca-bpel:service="recensione-v11"/>
     </bpws:partnerLinks>
     <bpws:variables>
@@ -2710,10 +2745,11 @@
         <bpws:variable element="ns2:recensioneDataRequest"
             name="AddRecensione-input" sca-bpel:internal="true"/>
         <bpws:variable element="ns2:idRecensione" name="AddRecensione" sca-bpel:internal="true"/>
-        <bpws:variable messageType="ns0:getRequest" name="get" sca-bpel:internal="true"/>
-        <bpws:variable messageType="ns0:getResponse" name="getOut-input" sca-bpel:internal="true"/>
-        <bpws:variable messageType="ns0:deleteRequest" name="delete" sca-bpel:internal="true"/>
-        <bpws:variable messageType="ns0:deleteResponse"
+        <bpws:variable messageType="ns0:getRequest1" name="get" sca-bpel:internal="true"/>
+        <bpws:variable messageType="ns0:getResponse1"
+            name="getOut-input" sca-bpel:internal="true"/>
+        <bpws:variable messageType="ns0:deleteRequest1" name="delete" sca-bpel:internal="true"/>
+        <bpws:variable messageType="ns0:deleteResponse1"
             name="deleteOut-input" sca-bpel:internal="true"/>
         <bpws:variable element="ns1:ActivityInput" name="Log2-input" sca-bpel:internal="true"/>
         <bpws:variable element="ns1:ActivityInput" name="Log3-input" sca-bpel:internal="true"/>
@@ -2721,7 +2757,7 @@
         <bpws:variable element="ns:FaultDetail" name="FaultDetails" sca-bpel:internal="true"/>
         <bpws:variable element="ns2:recensioneDataRequest"
             name="GetDataRecensione" sca-bpel:internal="true"/>
-        <bpws:variable messageType="ns0:get5XXFaultMessage"
+        <bpws:variable messageType="ns0:get5XXFaultMessage1"
             name="Reply1-input" sca-bpel:internal="true"/>
         <bpws:variable element="ns2:idRecensione"
             name="GetDataRecensione-input" sca-bpel:internal="true"/>
@@ -2733,15 +2769,15 @@
         <bpws:variable name="FaultName2" sca-bpel:internal="true" type="xsd:string"/>
         <bpws:variable element="ns:FaultDetail" name="FaultDetails1" sca-bpel:internal="true"/>
         <bpws:variable element="ns1:ActivityInput" name="Log7-input" sca-bpel:internal="true"/>
-        <bpws:variable messageType="ns0:get500FaultMessage"
+        <bpws:variable messageType="ns0:get5XXFaultMessage1"
             name="Reply3-input" sca-bpel:internal="true"/>
-        <bpws:variable messageType="ns0:delete5XXFaultMessage"
+        <bpws:variable messageType="ns0:delete5XXFaultMessage1"
             name="Reply4-input" sca-bpel:internal="true"/>
         <bpws:variable element="ns2:idRecensione" name="DeleteRec-input" sca-bpel:internal="true"/>
         <bpws:variable name="FaultName3" sca-bpel:internal="true" type="xsd:string"/>
         <bpws:variable element="ns:FaultDetail" name="FaultDetails2" sca-bpel:internal="true"/>
         <bpws:variable element="ns1:ActivityInput" name="Log8-input" sca-bpel:internal="true"/>
-        <bpws:variable messageType="ns0:delete500FaultMessage"
+        <bpws:variable messageType="ns0:delete5XXFaultMessage1"
             name="Reply5-input" sca-bpel:internal="true"/>
     </bpws:variables>
     <bpws:extensions>
@@ -2979,7 +3015,7 @@
                 </bpws:onMessage>
                 <bpws:onMessage operation="get"
                     partnerLink="recensione-v11"
-                    portType="ns0:recensione-v11"
+                    portType="ns0:recensione-v12"
                     tibex:xpdlId="92c4e1ae-95b9-443d-8b6e-7358c1b2d60e" variable="get">
                     <bpws:scope name="scope2">
                         <bpws:faultHandlers>
@@ -3026,17 +3062,17 @@
                                     </tibex:activityExtension>
                                     </bpws:extensionActivity>
                                     <bpws:reply
-                                    faultName="server-500-Fault"
+                                    faultName="serverFault"
                                     name="Reply3"
                                     operation="get"
                                     partnerLink="recensione-v11"
-                                    portType="ns0:recensione-v11"
+                                    portType="ns0:recensione-v12"
                                     tibex:xpdlId="d0a180dd-f02e-48ef-b1ca-47566565c91b" variable="Reply3-input">
                                     <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" version="2.0"&gt;&lt;xsl:template name="Reply3-input" match="/"&gt;&lt;tns:get500FaultMessage&gt;&lt;server-500-InternalServerError&gt;&lt;xsl:value-of select="&amp;quot;Errore lato server&amp;quot;"/&gt;&lt;/server-500-InternalServerError&gt;&lt;/tns:get500FaultMessage&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" xmlns:tns1="http://tns.tibco.com/bw/REST" version="2.0"&gt;&lt;xsl:template name="Reply3-input" match="/"&gt;&lt;tns:get5XXFaultMessage1&gt;&lt;serverError&gt;&lt;tns1:server5XXError&gt;&lt;statusCode&gt;&lt;xsl:value-of select="500"/&gt;&lt;/statusCode&gt;&lt;message&gt;&lt;xsl:value-of select="&amp;quot;Errore serever&amp;quot;"/&gt;&lt;/message&gt;&lt;/tns1:server5XXError&gt;&lt;/serverError&gt;&lt;/tns:get5XXFaultMessage1&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
                                     <tibex:inputBindings>
                                     <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20220930120034PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;Reply3-input&quot; match=&quot;/&quot;>&#xa;        &lt;server-500-InternalServerError>&#xa;            &lt;xsl:value-of select=&quot;&amp;quot;Errore lato server&amp;quot;&quot;/>&#xa;        &lt;/server-500-InternalServerError>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20220930120034PLT&quot; xmlns:tns1=&quot;http://tns.tibco.com/bw/REST&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;Reply3-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:server5XXError>&#xa;            &lt;statusCode>&#xa;                &lt;xsl:value-of select=&quot;500&quot;/>&#xa;            &lt;/statusCode>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;Errore serever&amp;quot;&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns1:server5XXError>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                     </tibex:inputBindings>
                                     <bpws:targets>
                                     <bpws:target linkName="Log7ToReply3"/>
@@ -3066,38 +3102,14 @@
                                 tibex:constructor="onMessageEnd" tibex:xpdlId="de331c16-f9f6-4ad2-a3c9-28c1d2a1592d"/>
                             <bpws:reply name="getOut" operation="get"
                                 partnerLink="recensione-v11"
-                                portType="ns0:recensione-v11"
+                                portType="ns0:recensione-v12"
                                 tibex:xpdlId="f145c6cf-404c-4d9c-9827-b6f4e06b7c07" variable="getOut-input">
                                 <tibex:inputBindings>
                                     <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20220930120034PLT&quot; xmlns:tns3=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;getOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:recensioneDataRequest>&#xa;            &lt;tns3:email>&#xa;                &lt;xsl:value-of select=&quot;$GetDataRecensione/tns3:email&quot;/>&#xa;            &lt;/tns3:email>&#xa;            &lt;tns3:titoloLibro>&#xa;                &lt;xsl:value-of select=&quot;$GetDataRecensione/tns3:titoloLibro&quot;/>&#xa;            &lt;/tns3:titoloLibro>&#xa;            &lt;tns3:stelle>&#xa;                &lt;xsl:value-of select=&quot;$GetDataRecensione/tns3:stelle&quot;/>&#xa;            &lt;/tns3:stelle>&#xa;            &lt;tns3:titoloCommento>&#xa;                &lt;xsl:value-of select=&quot;$GetDataRecensione/tns3:titoloCommento&quot;/>&#xa;            &lt;/tns3:titoloCommento>&#xa;            &lt;tns3:commento>&#xa;                &lt;xsl:value-of select=&quot;$GetDataRecensione/tns3:commento&quot;/>&#xa;            &lt;/tns3:commento>&#xa;        &lt;/tns3:recensioneDataRequest>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20220930120034PLT&quot; xmlns:tns3=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;GetDataRecensione&quot;/>&#xa;    &lt;xsl:template name=&quot;getOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:recensioneDataRequest>&#xa;            &lt;tns3:email>&#xa;                &lt;xsl:value-of select=&quot;$GetDataRecensione/tns3:email&quot;/>&#xa;            &lt;/tns3:email>&#xa;            &lt;tns3:titoloLibro>&#xa;                &lt;xsl:value-of select=&quot;$GetDataRecensione/tns3:titoloLibro&quot;/>&#xa;            &lt;/tns3:titoloLibro>&#xa;            &lt;tns3:stelle>&#xa;                &lt;xsl:value-of select=&quot;$GetDataRecensione/tns3:stelle&quot;/>&#xa;            &lt;/tns3:stelle>&#xa;            &lt;tns3:titoloCommento>&#xa;                &lt;xsl:value-of select=&quot;$GetDataRecensione/tns3:titoloCommento&quot;/>&#xa;            &lt;/tns3:titoloCommento>&#xa;            &lt;tns3:commento>&#xa;                &lt;xsl:value-of select=&quot;$GetDataRecensione/tns3:commento&quot;/>&#xa;            &lt;/tns3:commento>&#xa;        &lt;/tns3:recensioneDataRequest>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                 </tibex:inputBindings>
                                 <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" xmlns:tns3="http://www.libraryservice.com/RequestRecensione/v1" version="2.0"&gt;
-    &lt;xsl:template name="getOut-input" match="/"&gt;
-        &lt;tns:getResponse&gt;
-            &lt;ResponseDataRec&gt;
-                &lt;tns3:recensioneDataRequest&gt;
-                    &lt;tns3:email&gt;
-                        &lt;xsl:value-of select="$GetDataRecensione/tns3:email"/&gt;
-                    &lt;/tns3:email&gt;
-                    &lt;tns3:titoloLibro&gt;
-                        &lt;xsl:value-of select="$GetDataRecensione/tns3:titoloLibro"/&gt;
-                    &lt;/tns3:titoloLibro&gt;
-                    &lt;tns3:stelle&gt;
-                        &lt;xsl:value-of select="$GetDataRecensione/tns3:stelle"/&gt;
-                    &lt;/tns3:stelle&gt;
-                    &lt;tns3:titoloCommento&gt;
-                        &lt;xsl:value-of select="$GetDataRecensione/tns3:titoloCommento"/&gt;
-                    &lt;/tns3:titoloCommento&gt;
-                    &lt;tns3:commento&gt;
-                        &lt;xsl:value-of select="$GetDataRecensione/tns3:commento"/&gt;
-                    &lt;/tns3:commento&gt;
-                &lt;/tns3:recensioneDataRequest&gt;
-            &lt;/ResponseDataRec&gt;
-        &lt;/tns:getResponse&gt;
-    &lt;/xsl:template&gt;
-&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" xmlns:tns3="http://www.libraryservice.com/RequestRecensione/v1" version="2.0"&gt;&lt;xsl:param name="GetDataRecensione"/&gt;&lt;xsl:template name="getOut-input" match="/"&gt;&lt;tns:getResponse1&gt;&lt;item&gt;&lt;tns3:recensioneDataRequest&gt;&lt;tns3:email&gt;&lt;xsl:value-of select="$GetDataRecensione/tns3:email"/&gt;&lt;/tns3:email&gt;&lt;tns3:titoloLibro&gt;&lt;xsl:value-of select="$GetDataRecensione/tns3:titoloLibro"/&gt;&lt;/tns3:titoloLibro&gt;&lt;tns3:stelle&gt;&lt;xsl:value-of select="$GetDataRecensione/tns3:stelle"/&gt;&lt;/tns3:stelle&gt;&lt;tns3:titoloCommento&gt;&lt;xsl:value-of select="$GetDataRecensione/tns3:titoloCommento"/&gt;&lt;/tns3:titoloCommento&gt;&lt;tns3:commento&gt;&lt;xsl:value-of select="$GetDataRecensione/tns3:commento"/&gt;&lt;/tns3:commento&gt;&lt;/tns3:recensioneDataRequest&gt;&lt;/item&gt;&lt;/tns:getResponse1&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
                                 <bpws:targets>
                                     <bpws:target linkName="Log3TogetOut"/>
                                 </bpws:targets>
@@ -3140,7 +3152,7 @@
                             </bpws:extensionActivity>
                             <bpws:extensionActivity>
                                 <tibex:extActivity
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/recensione/parameters&quot; xmlns:tns3=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;get&quot;/>&lt;xsl:template name=&quot;GetDataRecensione-input&quot; match=&quot;/&quot;>&lt;tns3:idRecensione>&lt;xsl:value-of select=&quot;xsd:int($get/parameters/tns:recensione-v11GetParameters/tns:id)&quot;/>&lt;/tns3:idRecensione>&lt;/xsl:template>&lt;/xsl:stylesheet>"
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns4=&quot;http://xmlns.example.com/recensione/parameters&quot; xmlns:tns3=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;get&quot;/>&lt;xsl:template name=&quot;GetDataRecensione-input&quot; match=&quot;/&quot;>&lt;tns3:idRecensione>&lt;xsl:value-of select=&quot;xsd:int($get/parameters/tns4:recensione-v12GetParameters/tns4:id)&quot;/>&lt;/tns3:idRecensione>&lt;/xsl:template>&lt;/xsl:stylesheet>"
                                     expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
                                     inputVariable="GetDataRecensione-input"
                                     name="GetDataRecensione"
@@ -3164,7 +3176,7 @@
                                     </bpws:sources>
                                     <tibex:inputBindings>
                                     <tibex:inputBinding coercion=""
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/recensione/parameters&quot; xmlns:tns3=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;get.parameters&quot;/>&#xa;    &lt;xsl:template name=&quot;GetDataRecensione-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:idRecensione>&#xa;            &lt;xsl:value-of select=&quot;xsd:int($get.parameters/tns:id)&quot;/>&#xa;        &lt;/tns3:idRecensione>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns4=&quot;http://xmlns.example.com/recensione/parameters&quot; xmlns:tns3=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;get.parameters&quot;/>&#xa;    &lt;xsl:template name=&quot;GetDataRecensione-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:idRecensione>&#xa;            &lt;xsl:value-of select=&quot;xsd:int($get.parameters/tns4:id)&quot;/>&#xa;        &lt;/tns3:idRecensione>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                     </tibex:inputBindings>
                                     <tibex:CallProcess
                                     subProcessName="operation.GetDataRecensione" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
@@ -3209,10 +3221,10 @@
                             <bpws:reply faultName="serverFault"
                                 name="Reply1" operation="get"
                                 partnerLink="recensione-v11"
-                                portType="ns0:recensione-v11"
+                                portType="ns0:recensione-v12"
                                 tibex:xpdlId="c2447935-d5ee-4d42-8183-7e836f1bf86d" variable="Reply1-input">
                                 <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" xmlns:tns1="http://tns.tibco.com/bw/REST" version="2.0"&gt;&lt;xsl:template name="Reply1-input" match="/"&gt;&lt;tns:get5XXFaultMessage&gt;&lt;serverError&gt;&lt;tns1:server5XXError&gt;&lt;statusCode&gt;&lt;xsl:value-of select="500"/&gt;&lt;/statusCode&gt;&lt;message&gt;&lt;xsl:value-of select="&amp;quot;Errore lato server&amp;quot;"/&gt;&lt;/message&gt;&lt;/tns1:server5XXError&gt;&lt;/serverError&gt;&lt;/tns:get5XXFaultMessage&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" xmlns:tns1="http://tns.tibco.com/bw/REST" version="2.0"&gt;&lt;xsl:template name="Reply1-input" match="/"&gt;&lt;tns:get5XXFaultMessage1&gt;&lt;serverError&gt;&lt;tns1:server5XXError&gt;&lt;statusCode&gt;&lt;xsl:value-of select="500"/&gt;&lt;/statusCode&gt;&lt;message&gt;&lt;xsl:value-of select="&amp;quot;Errore lato server&amp;quot;"/&gt;&lt;/message&gt;&lt;/tns1:server5XXError&gt;&lt;/serverError&gt;&lt;/tns:get5XXFaultMessage1&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
                                 <tibex:inputBindings>
                                     <tibex:partBinding
                                     expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20220930120034PLT&quot; xmlns:tns1=&quot;http://tns.tibco.com/bw/REST&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;Reply1-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:server5XXError>&#xa;            &lt;statusCode>&#xa;                &lt;xsl:value-of select=&quot;500&quot;/>&#xa;            &lt;/statusCode>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;Errore lato server&amp;quot;&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns1:server5XXError>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
@@ -3226,7 +3238,7 @@
                 </bpws:onMessage>
                 <bpws:onMessage operation="delete"
                     partnerLink="recensione-v11"
-                    portType="ns0:recensione-v11"
+                    portType="ns0:recensione-v12"
                     tibex:xpdlId="74bb3b18-ae11-419f-8082-0a1de230bc32" variable="delete">
                     <bpws:scope name="scope4">
                         <bpws:faultHandlers>
@@ -3273,17 +3285,17 @@
                                     </tibex:activityExtension>
                                     </bpws:extensionActivity>
                                     <bpws:reply
-                                    faultName="server-500-Fault"
+                                    faultName="serverFault"
                                     name="Reply5"
                                     operation="delete"
                                     partnerLink="recensione-v11"
-                                    portType="ns0:recensione-v11"
+                                    portType="ns0:recensione-v12"
                                     tibex:xpdlId="b5a7e769-fdd0-47ba-b0e1-25a1eb67ee8b" variable="Reply5-input">
                                     <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" version="2.0"&gt;&lt;xsl:template name="Reply5-input" match="/"&gt;&lt;tns:delete500FaultMessage&gt;&lt;server-500-InternalServerError&gt;&lt;xsl:value-of select="&amp;quot;Errore lato server&amp;quot;"/&gt;&lt;/server-500-InternalServerError&gt;&lt;/tns:delete500FaultMessage&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" xmlns:tns1="http://tns.tibco.com/bw/REST" version="2.0"&gt;&lt;xsl:template name="Reply5-input" match="/"&gt;&lt;tns:delete5XXFaultMessage1&gt;&lt;serverError&gt;&lt;tns1:server5XXError&gt;&lt;statusCode&gt;&lt;xsl:value-of select="500"/&gt;&lt;/statusCode&gt;&lt;message&gt;&lt;xsl:value-of select="&amp;quot;Errore serever&amp;quot;"/&gt;&lt;/message&gt;&lt;/tns1:server5XXError&gt;&lt;/serverError&gt;&lt;/tns:delete5XXFaultMessage1&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
                                     <tibex:inputBindings>
                                     <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20220930120034PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;Reply5-input&quot; match=&quot;/&quot;>&#xa;        &lt;server-500-InternalServerError>&#xa;            &lt;xsl:value-of select=&quot;&amp;quot;Errore lato server&amp;quot;&quot;/>&#xa;        &lt;/server-500-InternalServerError>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20220930120034PLT&quot; xmlns:tns1=&quot;http://tns.tibco.com/bw/REST&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;Reply5-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:server5XXError>&#xa;            &lt;statusCode>&#xa;                &lt;xsl:value-of select=&quot;500&quot;/>&#xa;            &lt;/statusCode>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;Errore serever&amp;quot;&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns1:server5XXError>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                     </tibex:inputBindings>
                                     <bpws:targets>
                                     <bpws:target linkName="Log8ToReply5"/>
@@ -3312,14 +3324,14 @@
                             <bpws:reply name="deleteOut"
                                 operation="delete"
                                 partnerLink="recensione-v11"
-                                portType="ns0:recensione-v11"
+                                portType="ns0:recensione-v12"
                                 tibex:xpdlId="cd5d56d7-f557-4bab-ab12-478c819daded" variable="deleteOut-input">
                                 <tibex:inputBindings>
                                     <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20220930120034PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;deleteOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;msg>&#xa;            &lt;xsl:value-of select=&quot;&amp;quot;Eliminazion erecensione avvenuta con successo&amp;quot;&quot;/>&#xa;        &lt;/msg>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20220930120034PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;deleteOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;msg>&#xa;            &lt;xsl:value-of select=&quot;&amp;quot;Eliminazione avvenuta con successo&amp;quot;&quot;/>&#xa;        &lt;/msg>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                 </tibex:inputBindings>
                                 <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" version="2.0"&gt;&lt;xsl:template name="deleteOut-input" match="/"&gt;&lt;tns:deleteResponse&gt;&lt;msg&gt;&lt;xsl:value-of select="&amp;quot;Eliminazion erecensione avvenuta con successo&amp;quot;"/&gt;&lt;/msg&gt;&lt;/tns:deleteResponse&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" version="2.0"&gt;&lt;xsl:template name="deleteOut-input" match="/"&gt;&lt;tns:deleteResponse1&gt;&lt;msg&gt;&lt;xsl:value-of select="&amp;quot;Eliminazione avvenuta con successo&amp;quot;"/&gt;&lt;/msg&gt;&lt;/tns:deleteResponse1&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
                                 <bpws:targets>
                                     <bpws:target linkName="Log6TodeleteOut"/>
                                 </bpws:targets>
@@ -3362,7 +3374,7 @@
                             </bpws:extensionActivity>
                             <bpws:extensionActivity>
                                 <tibex:extActivity
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/recensione/parameters&quot; xmlns:tns3=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;delete&quot;/>&lt;xsl:template name=&quot;CallProcess-input&quot; match=&quot;/&quot;>&lt;tns3:idRecensione>&lt;xsl:value-of select=&quot;xsd:int($delete/parameters/tns:recensione-v11DeleteParameters/tns:id)&quot;/>&lt;/tns3:idRecensione>&lt;/xsl:template>&lt;/xsl:stylesheet>"
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns4=&quot;http://xmlns.example.com/recensione/parameters&quot; xmlns:tns3=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;delete&quot;/>&lt;xsl:template name=&quot;DeleteRec-input&quot; match=&quot;/&quot;>&lt;tns3:idRecensione>&lt;xsl:value-of select=&quot;xsd:int($delete/parameters/tns4:recensione-v12DeleteParameters/tns4:id)&quot;/>&lt;/tns3:idRecensione>&lt;/xsl:template>&lt;/xsl:stylesheet>"
                                     expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
                                     inputVariable="DeleteRec-input"
                                     name="DeleteRec"
@@ -3385,7 +3397,7 @@
                                     </bpws:sources>
                                     <tibex:inputBindings>
                                     <tibex:inputBinding coercion=""
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/recensione/parameters&quot; xmlns:tns3=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;delete.parameters&quot;/>&#xa;    &lt;xsl:template name=&quot;CallProcess-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:idRecensione>&#xa;            &lt;xsl:value-of select=&quot;xsd:int($delete.parameters/tns:id)&quot;/>&#xa;        &lt;/tns3:idRecensione>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns4=&quot;http://xmlns.example.com/recensione/parameters&quot; xmlns:tns3=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;delete.parameters&quot;/>&#xa;    &lt;xsl:template name=&quot;DeleteRec-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:idRecensione>&#xa;            &lt;xsl:value-of select=&quot;xsd:int($delete.parameters/tns4:id)&quot;/>&#xa;        &lt;/tns3:idRecensione>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                     </tibex:inputBindings>
                                     <tibex:CallProcess
                                     subProcessName="recensione.DeleteRecensione" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
@@ -3430,13 +3442,13 @@
                             <bpws:reply faultName="serverFault"
                                 name="Reply4" operation="delete"
                                 partnerLink="recensione-v11"
-                                portType="ns0:recensione-v11"
+                                portType="ns0:recensione-v12"
                                 tibex:xpdlId="c8864d42-a04a-4832-8edb-dbd9b7b6c1b9" variable="Reply4-input">
                                 <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" xmlns:tns1="http://tns.tibco.com/bw/REST" version="2.0"&gt;&lt;xsl:template name="Reply4-input" match="/"&gt;&lt;tns:delete5XXFaultMessage&gt;&lt;serverError&gt;&lt;tns1:server5XXError&gt;&lt;statusCode&gt;&lt;xsl:value-of select="500"/&gt;&lt;/statusCode&gt;&lt;message&gt;&lt;xsl:value-of select="&amp;quot;Errore lato server&amp;quot;"/&gt;&lt;/message&gt;&lt;/tns1:server5XXError&gt;&lt;/serverError&gt;&lt;/tns:delete5XXFaultMessage&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20220930120034PLT" xmlns:tns1="http://tns.tibco.com/bw/REST" version="2.0"&gt;&lt;xsl:template name="Reply4-input" match="/"&gt;&lt;tns:delete5XXFaultMessage1&gt;&lt;serverError&gt;&lt;tns1:server5XXError&gt;&lt;statusCode&gt;&lt;xsl:value-of select="500"/&gt;&lt;/statusCode&gt;&lt;message&gt;&lt;xsl:value-of select="&amp;quot;Errore serever&amp;quot;"/&gt;&lt;/message&gt;&lt;/tns1:server5XXError&gt;&lt;/serverError&gt;&lt;/tns:delete5XXFaultMessage1&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
                                 <tibex:inputBindings>
                                     <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20220930120034PLT&quot; xmlns:tns1=&quot;http://tns.tibco.com/bw/REST&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;Reply4-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:server5XXError>&#xa;            &lt;statusCode>&#xa;                &lt;xsl:value-of select=&quot;500&quot;/>&#xa;            &lt;/statusCode>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;Errore lato server&amp;quot;&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns1:server5XXError>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20220930120034PLT&quot; xmlns:tns1=&quot;http://tns.tibco.com/bw/REST&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:template name=&quot;Reply4-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:server5XXError>&#xa;            &lt;statusCode>&#xa;                &lt;xsl:value-of select=&quot;500&quot;/>&#xa;            &lt;/statusCode>&#xa;            &lt;message>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;Errore serever&amp;quot;&quot;/>&#xa;            &lt;/message>&#xa;        &lt;/tns1:server5XXError>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                 </tibex:inputBindings>
                                 <bpws:targets>
                                     <bpws:target linkName="CallProcessToReply4"/>

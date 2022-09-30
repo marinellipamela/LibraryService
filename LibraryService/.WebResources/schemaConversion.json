@@ -48,5 +48,10 @@
         "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainRecensione-recensione.json",
         "conversionType": "linked",
         "xsdSchemaTargetNamespace": "http://www.libraryservice.com/RequestRecensione/v1"
+    },
+    {
+        "jsonSchemaLocation": "/LibraryService/Service Descriptors/libraryservice.MainGenereAutore-genereAutore.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.libraryservice.com/xmlns/generiAutori/v1"
     }
 ]}
