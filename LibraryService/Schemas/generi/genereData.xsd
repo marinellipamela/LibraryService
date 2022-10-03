@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.libraryservice.com/xmlns/genereData/v1" xmlns:tns="http://www.libraryservice.com/xmlns/genereData/v1" elementFormDefault="qualified">
+
+	<xsd:element name="genere">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="nomeGenere" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="idGenere" type="xsd:int" minOccurs="0" maxOccurs="1"/>	
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</schema>

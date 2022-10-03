@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.libraryservice.com/RequestRecensione/v1" xmlns:tns="http://www.libraryservice.com/RequestRecensione/v1" elementFormDefault="qualified">
+
+	<xsd:element name="recensioneDataRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="email" type="xsd:string"/>
+				<xsd:element name="titoloLibro" type="xsd:string"/>
+				<xsd:element name="stelle">
+					<simpleType>
+						<restriction base="int">
+							<maxExclusive value="6"></maxExclusive>
+						</restriction>
+					</simpleType>
+				</xsd:element>
+				<xsd:element name="titoloCommento" type="xsd:string"/>
+				<xsd:element name="commento" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="idRecensione" type="xsd:int"/>
+	
+		<xsd:element name="recensioneDataID">
+			<xsd:complexType>
+				<xsd:sequence>
+					<xsd:element name="id_utente" type="xsd:int"/>
+					<xsd:element name="isbn_libro" type="xsd:string"/>
+					<xsd:element name="stelle" type="xsd:int"/>
+					<xsd:element name="titoloCommento" type="xsd:string"/>
+					<xsd:element name="commento" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+	</xsd:element>
+
+</schema>

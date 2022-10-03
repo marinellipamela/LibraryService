@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.libraryservice.com/xmlns/generiAutori/v1" xmlns:tns="http://www.libraryservice.com/xmlns/generiAutori/v1" elementFormDefault="qualified">
+
+	<xsd:element name="listaAutori">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="autore" minOccurs="0" maxOccurs="unbounded">
+				    <xsd:complexType>
+				      <xsd:sequence>
+				        <xsd:element maxOccurs="1" minOccurs="1" name="nome" type="xsd:string"/>
+				        <xsd:element maxOccurs="1" minOccurs="1" name="cognome" type="xsd:string"/>
+				        <xsd:element maxOccurs="1" minOccurs="0" name="pseudomino" type="xsd:string"/>
+				        <xsd:element name="nascita" type="xsd:date" minOccurs="0" maxOccurs="1"/>
+				        <xsd:element name="luogo" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+				       </xsd:sequence>
+				    </xsd:complexType>
+		  		</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="listaIDAutori">
+			<xsd:complexType>
+				<xsd:sequence>
+					<xsd:element name="IDautore" minOccurs="0" maxOccurs="unbounded">
+					    <xsd:complexType>
+					      <xsd:sequence>
+					        <xsd:element maxOccurs="1" minOccurs="1" name="id" type="xsd:int"/>
+					       </xsd:sequence>
+					    </xsd:complexType>
+			  		</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:element>
+</schema>

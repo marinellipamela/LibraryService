@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpws:process exitOnStandardFault="no" name="operation.AddUserBook"
+<bpws:process exitOnStandardFault="no" name="recensione.GetRecensione"
     suppressJoinFailure="yes"
-    targetNamespace="http://xmlns.example.com/20220929122143"
+    targetNamespace="http://xmlns.example.com/20220930125615"
     xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
     xmlns:info="http://www.tibco.com/bw/process/info"
     xmlns:ns="http://www.tibco.com/pe/EngineTypes"
-    xmlns:ns0="http://www.libraryservice.com/requestUserBook/v1"
-    xmlns:ns1="http://www.libraryservice.com/userBook/v1"
-    xmlns:ns2="http://www.tibco.com/pe/WriteToLogActivitySchema"
-    xmlns:ns3="http://www.libraryservice.com/xmlns/user/v1"
-    xmlns:ns4="http://www.example.com/namespaces/tns/1664436339458"
+    xmlns:ns0="http://www.tibco.com/pe/WriteToLogActivitySchema"
+    xmlns:ns1="http://www.tibco.com/namespaces/tnt/plugins/jdbc+171389a6-9533-4ed9-b70c-cd6ee9922342+input"
+    xmlns:ns2="http://www.tibco.com/namespaces/tnt/plugins/jdbc+171389a6-9533-4ed9-b70c-cd6ee9922342+output"
+    xmlns:ns3="http://tns.tibco.com/bw/palette/internal/activityerror+bw.jdbc.JDBCQuery"
+    xmlns:ns4="http://www.libraryservice.com/RequestRecensione/v1"
     xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
     xmlns:sca-bpel="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"
     xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
@@ -192,14 +192,165 @@
             </xs:complexType>
             <xs:element name="ActivityInput" type="tns:LogParametersType"/>
         </xs:schema>
+        <schema
+            targetNamespace="http://www.tibco.com/namespaces/tnt/plugins/jdbc+171389a6-9533-4ed9-b70c-cd6ee9922342+input"
+            xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.tibco.com/namespaces/tnt/plugins/jdbc+171389a6-9533-4ed9-b70c-cd6ee9922342+input">
+            <element name="jdbcQueryActivityInput">
+                <complexType>
+                    <sequence>
+                        <element maxOccurs="1" minOccurs="1" name="id"
+                            nillable="true" type="int"/>
+                        <element maxOccurs="1" minOccurs="0"
+                            name="ServerTimeZone" type="string"/>
+                        <element maxOccurs="1" minOccurs="0"
+                            name="timeout" type="long"/>
+                        <element maxOccurs="1" minOccurs="0"
+                            name="maxRows" type="long"/>
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+        <schema
+            targetNamespace="http://www.tibco.com/namespaces/tnt/plugins/jdbc+171389a6-9533-4ed9-b70c-cd6ee9922342+output"
+            xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.tibco.com/namespaces/tnt/plugins/jdbc+171389a6-9533-4ed9-b70c-cd6ee9922342+output">
+            <element name="resultSet">
+                <complexType>
+                    <sequence>
+                        <element maxOccurs="unbounded" minOccurs="0" name="Record">
+                            <complexType>
+                                <sequence>
+                                    <element maxOccurs="1" minOccurs="1"
+                                    name="id" type="int"/>
+                                    <element maxOccurs="1" minOccurs="0"
+                                    name="isbn_libro"
+                                    nillable="false" type="string"/>
+                                    <element maxOccurs="1" minOccurs="0"
+                                    name="id_utente"
+                                    nillable="false" type="int"/>
+                                    <element maxOccurs="1" minOccurs="0"
+                                    name="stelle" nillable="false" type="int"/>
+                                    <element maxOccurs="1" minOccurs="0"
+                                    name="titolo" nillable="false" type="string"/>
+                                    <element maxOccurs="1" minOccurs="0"
+                                    name="commento" nillable="false" type="string"/>
+                                </sequence>
+                            </complexType>
+                        </element>
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions"
+            version="0.1" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns2="http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions">
+            <complexType name="ActivityExceptionType">
+                <sequence>
+                    <element name="msg" type="string"/>
+                    <element minOccurs="0" name="msgCode" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="PluginExceptionType">
+                <complexContent>
+                    <extension base="tns2:ActivityExceptionType"/>
+                </complexContent>
+            </complexType>
+            <element name="JDBCPluginException" type="tns2:JDBCPluginExceptionType"/>
+            <complexType name="JDBCPluginExceptionType">
+                <complexContent>
+                    <extension base="tns2:PluginExceptionType"/>
+                </complexContent>
+            </complexType>
+            <element name="InvalidSQLTypeException" type="tns2:InvalidSQLTypeExceptionType"/>
+            <complexType name="InvalidSQLTypeExceptionType">
+                <complexContent>
+                    <extension base="tns2:JDBCPluginExceptionType">
+                        <sequence>
+                            <element name="typeName" type="string"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="JDBCConnectionNotFoundException" type="tns2:JDBCConnectionNotFoundExceptionType"/>
+            <complexType name="JDBCConnectionNotFoundExceptionType">
+                <complexContent>
+                    <extension base="tns2:JDBCPluginExceptionType">
+                        <sequence>
+                            <element name="jdbcConnection" type="string"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DuplicatedFieldNameException" type="tns2:DuplicatedFieldNameExceptionType"/>
+            <complexType name="DuplicatedFieldNameExceptionType">
+                <complexContent>
+                    <extension base="tns2:JDBCPluginExceptionType">
+                        <sequence>
+                            <element name="fieldName" type="string"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="InvalidTimeZoneException" type="tns2:InvalidTimeZoneExceptionType"/>
+            <complexType name="InvalidTimeZoneExceptionType">
+                <complexContent>
+                    <extension base="tns2:JDBCPluginExceptionType">
+                        <sequence>
+                            <element name="timeZone" type="string"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="JDBCSQLException" type="tns2:JDBCSQLExceptionType"/>
+            <complexType name="JDBCSQLExceptionType">
+                <complexContent>
+                    <extension base="tns2:JDBCPluginExceptionType">
+                        <sequence>
+                            <element name="sqlState" type="string"/>
+                            <element name="detailStr" type="string"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="LoginTimedOutException" type="tns2:LoginTimedOutExceptionType"/>
+            <complexType name="LoginTimedOutExceptionType">
+                <complexContent>
+                    <extension base="tns2:JDBCPluginExceptionType"/>
+                </complexContent>
+            </complexType>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+bw.jdbc.JDBCQuery"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions"
+            xmlns:Q2="http://schemas.tibco.com/bw/pe/plugin/5.0/exceptions" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+bw.jdbc.JDBCQuery">
+            <import namespace="http://schemas.tibco.com/bw/pe/plugin/5.0/exceptions"/>
+            <import namespace="http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions"/>
+            <import namespace="http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions"/>
+            <import namespace="http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions"/>
+            <import namespace="http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions"/>
+            <import namespace="http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions"/>
+            <import namespace="http://schemas.tibco.com/bw/plugins/jdbc/5.0/jdbcExceptions"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:JDBCConnectionNotFoundException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:InvalidTimeZoneException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:JDBCSQLException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:LoginTimedOutException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:InvalidSQLTypeException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:DuplicatedFieldNameException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q2:ActivityTimedOutException"/>
+                </choice>
+            </complexType>
+        </schema>
     </tibex:Types>
     <tibex:ProcessInfo callable="true" createdBy="Pamela"
-        createdOn="Thu Sep 29 12:21:43 CEST 2022" description=""
+        createdOn="Fri Sep 30 12:56:15 CEST 2022" description=""
         extraErrorVars="true" modifiers="public"
         productVersion="6.7.0 V34 2020-11-06" scalable="true"
         singleton="true" stateless="false" type="IT"/>
     <tibex:ProcessInterface context=""
-        input="{http://www.libraryservice.com/requestUserBook/v1}RequestUserBookData" output="{http://www.libraryservice.com/userBook/v1}userBookID"/>
+        input="{http://www.libraryservice.com/RequestRecensione/v1}idRecensione" output="{http://www.libraryservice.com/RequestRecensione/v1}recensioneDataID"/>
     <tibex:ProcessTemplateConfigurations/>
     <notation:Diagram measurementUnit="Pixel" type="BWProcess"
         xmlns:bwnotation="http://tns.tibco.com/bw/runtime/BWNotation"
@@ -253,8 +404,8 @@
                                     gradientEndColor="50431"
                                     gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0"/>
-                                    <layoutConstraint x="-37"
-                                    xsi:type="notation:Bounds" y="99"/>
+                                    <layoutConstraint x="-36"
+                                    xsi:type="notation:Bounds" y="109"/>
                                     </children>
                                     <children type="4002">
                                     <children type="4017">
@@ -288,8 +439,8 @@
                                     gradientEndColor="50431"
                                     gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.1"/>
-                                    <layoutConstraint x="849"
-                                    xsi:type="notation:Bounds" y="99"/>
+                                    <layoutConstraint x="535"
+                                    xsi:type="notation:Bounds" y="109"/>
                                     </children>
                                     <children type="4002">
                                     <children type="4017">
@@ -323,8 +474,8 @@
                                     gradientEndColor="50431"
                                     gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.2"/>
-                                    <layoutConstraint x="75"
-                                    xsi:type="notation:Bounds" y="99"/>
+                                    <layoutConstraint x="131"
+                                    xsi:type="notation:Bounds" y="109"/>
                                     </children>
                                     <children type="4002">
                                     <children type="4017">
@@ -358,8 +509,8 @@
                                     gradientEndColor="50431"
                                     gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.3"/>
-                                    <layoutConstraint x="188"
-                                    xsi:type="notation:Bounds" y="99"/>
+                                    <layoutConstraint x="295"
+                                    xsi:type="notation:Bounds" y="109"/>
                                     </children>
                                     <children type="4002">
                                     <children type="4017">
@@ -393,113 +544,8 @@
                                     gradientEndColor="50431"
                                     gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.4"/>
-                                    <layoutConstraint x="301"
-                                    xsi:type="notation:Bounds" y="99"/>
-                                    </children>
-                                    <children type="4002">
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <styles fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <styles
-                                    backgroundColor="16777215"
-                                    gradientEndColor="50431"
-                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
-                                    <element href="//0/@process/@activity/@activity/@activities.5"/>
-                                    <layoutConstraint x="426"
-                                    xsi:type="notation:Bounds" y="99"/>
-                                    </children>
-                                    <children type="4002">
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <styles fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <styles
-                                    backgroundColor="16777215"
-                                    gradientEndColor="50431"
-                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
-                                    <element href="//0/@process/@activity/@activity/@activities.6"/>
-                                    <layoutConstraint x="727"
-                                    xsi:type="notation:Bounds" y="99"/>
-                                    </children>
-                                    <children type="4002">
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <children type="4017">
-                                    <styles
-                                    fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
-                                    </children>
-                                    <styles fontName="Segoe UI"
-                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
-                                    <styles
-                                    backgroundColor="16777215"
-                                    gradientEndColor="50431"
-                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
-                                    <element href="//0/@process/@activity/@activity/@activities.7"/>
-                                    <layoutConstraint x="587"
-                                    xsi:type="notation:Bounds" y="99"/>
+                                    <layoutConstraint x="402"
+                                    xsi:type="notation:Bounds" y="109"/>
                                     </children>
                                     <styles xsi:type="notation:DrawerStyle"/>
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -514,7 +560,7 @@
                                     <styles xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity"/>
                                     <layoutConstraint height="384"
-                                    width="1092" xsi:type="notation:Bounds"/>
+                                    width="787" xsi:type="notation:Bounds"/>
                                 </children>
                                 <styles xsi:type="notation:SortingStyle"/>
                                 <styles xsi:type="notation:FilteringStyle"/>
@@ -523,7 +569,7 @@
                             <styles xsi:type="bwnotation:BackgroundStyle"/>
                             <styles xsi:type="bwnotation:ResizingStyle"/>
                             <element href="//0/@process/@activity"/>
-                            <layoutConstraint height="259" width="1025" xsi:type="notation:Bounds"/>
+                            <layoutConstraint height="244" width="790" xsi:type="notation:Bounds"/>
                         </children>
                         <children type="4022">
                             <children type="3022">
@@ -581,8 +627,8 @@
                                     gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
                                     <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@activities.0"/>
                                     <layoutConstraint
-                                    x="379"
-                                    xsi:type="notation:Bounds" y="49"/>
+                                    x="259"
+                                    xsi:type="notation:Bounds" y="56"/>
                                     </children>
                                     <styles xsi:type="notation:DrawerStyle"/>
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -625,7 +671,7 @@
                     <styles xsi:type="bwnotation:BackgroundStyle"/>
                     <styles xsi:type="bwnotation:ResizingStyle"/>
                     <element href="//0/@process/@activity"/>
-                    <layoutConstraint height="495" width="1025" x="1"
+                    <layoutConstraint height="480" width="790" x="1"
                         xsi:type="notation:Bounds" y="1"/>
                 </children>
                 <styles xsi:type="notation:SortingStyle"/>
@@ -634,7 +680,7 @@
             </children>
             <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
             <element href="//0/@process"/>
-            <layoutConstraint height="547" width="1367" xsi:type="notation:Bounds"/>
+            <layoutConstraint height="532" width="1132" xsi:type="notation:Bounds"/>
         </children>
         <styles xsi:type="notation:DiagramStyle"/>
         <element href="//0"/>
@@ -673,85 +719,49 @@
         </edges>
         <edges
             source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.4"
-            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.5" type="4006">
-            <children type="6002">
-                <layoutConstraint xsi:type="notation:Location" y="40"/>
-            </children>
-            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
-            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@links/@children.3"/>
-            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
-        </edges>
-        <edges
-            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.6"
             target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
             <children type="6002">
                 <layoutConstraint xsi:type="notation:Location" y="40"/>
             </children>
             <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
             <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@links/@children.4"/>
-            <bendpoints points="[-24, 0, 176, 0]$[-175, 0, 25, 0]" xsi:type="notation:RelativeBendpoints"/>
-        </edges>
-        <edges
-            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.5"
-            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.7" type="4006">
-            <children type="6002">
-                <layoutConstraint xsi:type="notation:Location" y="40"/>
-            </children>
-            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
-            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@links/@children.5"/>
-            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
-        </edges>
-        <edges
-            source="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.7"
-            target="//@children.0/@children.3/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.6" type="4006">
-            <children type="6002">
-                <layoutConstraint xsi:type="notation:Location" y="40"/>
-            </children>
-            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
-            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@links/@children.6"/>
-            <bendpoints points="[25, 3, -114, -12]$[115, 12, -24, -3]" xsi:type="notation:RelativeBendpoints"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.3"/>
+            <bendpoints points="[25, 0, -54, 0]$[55, 0, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
         </edges>
     </notation:Diagram>
     <tibex:NamespaceRegistry enabled="true">
         <tibex:namespaceItem
             namespace="http://www.tibco.com/pe/WriteToLogActivitySchema" prefix="tns"/>
         <tibex:namespaceItem
-            namespace="http://www.libraryservice.com/xmlns/user/v1" prefix="tns1"/>
+            namespace="http://www.tibco.com/namespaces/tnt/plugins/jdbc+171389a6-9533-4ed9-b70c-cd6ee9922342+input" prefix="tns1"/>
         <tibex:namespaceItem
-            namespace="http://www.example.com/namespaces/tns/1664436339458" prefix="tns3"/>
-        <tibex:namespaceItem
-            namespace="http://www.libraryservice.com/requestUserBook/v1" prefix="tns2"/>
-        <tibex:namespaceItem
-            namespace="http://www.libraryservice.com/userBook/v1" prefix="tns4"/>
+            namespace="http://www.libraryservice.com/RequestRecensione/v1" prefix="tns2"/>
     </tibex:NamespaceRegistry>
-    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.libraryservice.com/requestUserBook/v1"/>
-    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.libraryservice.com/userBook/v1"/>
-    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.libraryservice.com/xmlns/user/v1"/>
-    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.example.com/namespaces/tns/1664436339458"/>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.libraryservice.com/RequestRecensione/v1"/>
     <bpws:variables>
         <bpws:variable element="ns:ProcessContext"
             name="_processContext" sca-bpel:internal="true"/>
-        <bpws:variable element="ns0:RequestUserBookData" name="Start"
-            sca-bpel:internal="true" tibex:parameter="in"/>
-        <bpws:variable element="ns1:userBookID" name="End-input"
+        <bpws:variable element="ns0:ActivityInput" name="Log-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns1:jdbcQueryActivityInput"
+            name="JDBCQuery-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns2:resultSet" name="JDBCQuery" sca-bpel:internal="true"/>
+        <bpws:variable element="ns3:ActivityErrorData"
+            name="_error_JDBCQuery" sca-bpel:internal="true"/>
+        <bpws:variable element="ns:ErrorReport" name="_error" sca-bpel:internal="true"/>
+        <bpws:variable name="jdbcProperty" sca-bpel:hotUpdate="false"
+            sca-bpel:privateProperty="true" sca-bpel:property="yes"
+            sca-bpel:sharedResourceType="{http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc}JdbcDataSource" type="xsd:string">
+            <bpws:from>
+                <bpws:literal>libraryservice.JDBCConnectionResource</bpws:literal>
+            </bpws:from>
+        </bpws:variable>
+        <bpws:variable element="ns0:ActivityInput" name="Log1-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns4:recensioneDataID" name="End-input"
             sca-bpel:internal="true" tibex:parameter="out"/>
-        <bpws:variable element="ns2:ActivityInput" name="Log-input" sca-bpel:internal="true"/>
-        <bpws:variable element="ns2:ActivityInput" name="Log1-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns4:idRecensione" name="Start"
+            sca-bpel:internal="true" tibex:parameter="in"/>
         <bpws:variable name="FaultName" sca-bpel:internal="true" type="xsd:string"/>
         <bpws:variable element="ns:FaultDetail" name="FaultDetails" sca-bpel:internal="true"/>
-        <bpws:variable element="ns3:userRequest" name="GetIdUser-input" sca-bpel:internal="true"/>
-        <bpws:variable element="ns3:userResponse" name="GetIdUser" sca-bpel:internal="true"/>
-        <bpws:variable element="ns4:book" name="GetISBNBook-input" sca-bpel:internal="true"/>
-        <bpws:variable element="ns4:book" name="GetISBNBook" sca-bpel:internal="true"/>
-        <bpws:variable element="ns1:userBookData"
-            name="SaveUserBook-input" sca-bpel:internal="true"/>
-        <bpws:variable element="ns1:userBookID" name="GetIdUserBook" sca-bpel:internal="true"/>
-        <bpws:variable element="ns1:userBookData"
-            name="GetIdUserBook-input" sca-bpel:internal="true"/>
     </bpws:variables>
     <bpws:extensions>
         <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
@@ -764,11 +774,11 @@
     <bpws:scope name="scope">
         <bpws:faultHandlers>
             <bpws:catchAll tibex:faultDetailsVar="FaultDetails"
-                tibex:faultNameVar="FaultName" tibex:xpdlId="0939bf7f-fa77-4916-a3fb-d93e169cafe7">
+                tibex:faultNameVar="FaultName" tibex:xpdlId="f9e4c14d-9677-4116-a2c7-3905f68166bd">
                 <bpws:scope name="scope1">
                     <bpws:flow name="flow1">
                         <bpws:links/>
-                        <bpws:rethrow name="Rethrow" tibex:xpdlId="1af01cd8-678a-45da-96b7-2281d1be8bac"/>
+                        <bpws:rethrow name="Rethrow" tibex:xpdlId="65284d55-df0a-4c73-a322-cd9ccd779f99"/>
                     </bpws:flow>
                 </bpws:scope>
             </bpws:catchAll>
@@ -776,17 +786,14 @@
         <bpws:flow name="flow">
             <bpws:links>
                 <bpws:link name="StartToLog" tibex:linkType="SUCCESS"/>
-                <bpws:link name="LogToCallProcess" tibex:linkType="SUCCESS"/>
-                <bpws:link name="GetIdUserToCallProcess" tibex:linkType="SUCCESS"/>
-                <bpws:link name="GetISBNBookToCallProcess" tibex:linkType="SUCCESS"/>
+                <bpws:link name="LogToJDBCQuery" tibex:linkType="SUCCESS"/>
+                <bpws:link name="JDBCQueryToLog1" tibex:linkType="SUCCESS"/>
                 <bpws:link name="Log1ToEnd" tibex:linkType="SUCCESS"/>
-                <bpws:link name="SaveUserBookToCallProcess" tibex:linkType="SUCCESS"/>
-                <bpws:link name="GetIdUserBookToLog1" tibex:linkType="SUCCESS"/>
             </bpws:links>
             <bpws:extensionActivity>
                 <tibex:receiveEvent createInstance="yes"
                     eventTimeout="0" name="Start"
-                    tibex:xpdlId="918eff24-4e44-41f2-9321-753bc4d2fa45"
+                    tibex:xpdlId="77eb3223-d5ba-496a-986d-fc4fd25b62cc"
                     variable="Start" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
                     <bpws:sources>
                         <bpws:source linkName="StartToLog"/>
@@ -799,13 +806,13 @@
             <bpws:extensionActivity>
                 <tibex:activityExtension inputVariable="End-input"
                     name="End"
-                    tibex:xpdlId="2b6d193a-4336-4fe3-92cd-a8f876112257" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    tibex:xpdlId="232f0c45-089e-4c31-a5fe-e6400fb8bfc9" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
                     <bpws:targets>
                         <bpws:target linkName="Log1ToEnd"/>
                     </bpws:targets>
                     <tibex:inputBindings>
                         <tibex:inputBinding
-                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns4=&quot;http://www.libraryservice.com/userBook/v1&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;GetIdUserBook&quot;/>&lt;xsl:template name=&quot;End-input&quot; match=&quot;/&quot;>&lt;tns4:userBookID>&lt;tns4:id>&lt;xsl:value-of select=&quot;$GetIdUserBook/tns4:id&quot;/>&lt;/tns4:id>&lt;/tns4:userBookID>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;JDBCQuery&quot;/>&lt;xsl:template name=&quot;End-input&quot; match=&quot;/&quot;>&lt;tns2:recensioneDataID>&lt;tns2:id_utente>&lt;xsl:value-of select=&quot;$JDBCQuery/Record[1]/id_utente&quot;/>&lt;/tns2:id_utente>&lt;tns2:isbn_libro>&lt;xsl:value-of select=&quot;$JDBCQuery/Record[1]/isbn_libro&quot;/>&lt;/tns2:isbn_libro>&lt;tns2:stelle>&lt;xsl:value-of select=&quot;$JDBCQuery/Record[1]/stelle&quot;/>&lt;/tns2:stelle>&lt;tns2:titoloCommento>&lt;xsl:value-of select=&quot;$JDBCQuery/Record[1]/titolo&quot;/>&lt;/tns2:titoloCommento>&lt;tns2:commento>&lt;xsl:value-of select=&quot;$JDBCQuery/Record[1]/commento&quot;/>&lt;/tns2:commento>&lt;/tns2:recensioneDataID>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                     </tibex:inputBindings>
                     <tibex:config>
                         <bwext:BWActivity
@@ -826,16 +833,16 @@
             <bpws:extensionActivity>
                 <tibex:activityExtension inputVariable="Log-input"
                     name="Log"
-                    tibex:xpdlId="897cd99b-699a-45b5-89ff-1d4c2604c662" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    tibex:xpdlId="961ff756-2a44-4edd-8260-095abca84bc6" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
                     <bpws:targets>
                         <bpws:target linkName="StartToLog"/>
                     </bpws:targets>
                     <bpws:sources>
-                        <bpws:source linkName="LogToCallProcess"/>
+                        <bpws:source linkName="LogToJDBCQuery"/>
                     </bpws:sources>
                     <tibex:inputBindings>
                         <tibex:inputBinding
-                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; version=&quot;2.0&quot;>&lt;xsl:template name=&quot;Log-input&quot; match=&quot;/&quot;>&lt;tns:ActivityInput>&lt;message>&lt;xsl:value-of select=&quot;&amp;quot;Inizio processo AddUser, di seguito acquisizione id utente&amp;quot;&quot;/>&lt;/message>&lt;/tns:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; version=&quot;2.0&quot;>&lt;xsl:template name=&quot;Log-input&quot; match=&quot;/&quot;>&lt;tns:ActivityInput>&lt;message>&lt;xsl:value-of select=&quot;&amp;quot;Get recensione&amp;quot;&quot;/>&lt;/message>&lt;/tns:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                     </tibex:inputBindings>
                     <tibex:config>
                         <bwext:BWActivity
@@ -857,75 +864,76 @@
                 </tibex:activityExtension>
             </bpws:extensionActivity>
             <bpws:extensionActivity>
-                <tibex:extActivity inputVariable="GetIdUser-input"
-                    name="GetIdUser" outputVariable="GetIdUser"
-                    tibex:xpdlId="229590dc-2129-4462-96ee-3a1667abb556"
-                    type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                <tibex:activityExtension inputVariable="JDBCQuery-input"
+                    name="JDBCQuery" outputVariable="JDBCQuery"
+                    tibex:xpdlId="171389a6-9533-4ed9-b70c-cd6ee9922342" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
                     <bpws:targets>
-                        <bpws:target linkName="LogToCallProcess"/>
+                        <bpws:target linkName="LogToJDBCQuery"/>
                     </bpws:targets>
                     <bpws:sources>
-                        <bpws:source linkName="GetIdUserToCallProcess"/>
+                        <bpws:source linkName="JDBCQueryToLog1"/>
                     </bpws:sources>
                     <tibex:inputBindings>
-                        <tibex:inputBinding coercion=""
-                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://www.libraryservice.com/requestUserBook/v1&quot; xmlns:tns1=&quot;http://www.libraryservice.com/xmlns/user/v1&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;Start&quot;/>&#xa;    &lt;xsl:template name=&quot;GetIdUser-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:userRequest>&#xa;            &lt;tns1:email>&#xa;                &lt;xsl:value-of select=&quot;$Start/tns2:email_utente&quot;/>&#xa;            &lt;/tns1:email>&#xa;            &lt;tns1:name>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;&amp;quot;&quot;/>&#xa;            &lt;/tns1:name>&#xa;            &lt;tns1:surname>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;&amp;quot;&quot;/>&#xa;            &lt;/tns1:surname>&#xa;            &lt;tns1:nickname>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;&amp;quot;&quot;/>&#xa;            &lt;/tns1:nickname>&#xa;            &lt;tns1:password>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;&amp;quot;&quot;/>&#xa;            &lt;/tns1:password>&#xa;        &lt;/tns1:userRequest>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://www.tibco.com/namespaces/tnt/plugins/jdbc+171389a6-9533-4ed9-b70c-cd6ee9922342+input&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;Start&quot;/>&lt;xsl:template name=&quot;JDBCQuery-input&quot; match=&quot;/&quot;>&lt;tns1:jdbcQueryActivityInput>&lt;id>&lt;xsl:value-of select=&quot;$Start&quot;/>&lt;/id>&lt;/tns1:jdbcQueryActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                     </tibex:inputBindings>
-                    <tibex:CallProcess
-                        subProcessName="user.jdbc.GetIdUser" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
-                </tibex:extActivity>
-            </bpws:extensionActivity>
-            <bpws:extensionActivity>
-                <tibex:extActivity inputVariable="GetISBNBook-input"
-                    name="GetISBNBook" outputVariable="GetISBNBook"
-                    tibex:xpdlId="9621da0c-154c-4368-b804-850a8e1c18e7"
-                    type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
-                    <bpws:targets>
-                        <bpws:target linkName="GetIdUserToCallProcess"/>
-                    </bpws:targets>
-                    <bpws:sources>
-                        <bpws:source linkName="GetISBNBookToCallProcess"/>
-                    </bpws:sources>
-                    <tibex:inputBindings>
-                        <tibex:inputBinding coercion=""
-                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://www.libraryservice.com/requestUserBook/v1&quot; xmlns:tns3=&quot;http://www.example.com/namespaces/tns/1664436339458&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;Start&quot;/>&#xa;    &lt;xsl:template name=&quot;GetISBNBook-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns3:book>&#xa;            &lt;tns3:titolo>&#xa;                &lt;xsl:value-of select=&quot;$Start/tns2:titolo_libro&quot;/>&#xa;            &lt;/tns3:titolo>&#xa;            &lt;tns3:lingua>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;&amp;quot;&quot;/>&#xa;            &lt;/tns3:lingua>&#xa;            &lt;tns3:isbn>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;&amp;quot;&quot;/>&#xa;            &lt;/tns3:isbn>&#xa;            &lt;tns3:casa_editrice>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;&amp;quot;&quot;/>&#xa;            &lt;/tns3:casa_editrice>&#xa;            &lt;tns3:anno>&#xa;                &lt;xsl:value-of select=&quot;0&quot;/>&#xa;            &lt;/tns3:anno>&#xa;            &lt;tns3:pagine>&#xa;                &lt;xsl:value-of select=&quot;0&quot;/>&#xa;            &lt;/tns3:pagine>&#xa;            &lt;tns3:descrizione>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;&amp;quot;&quot;/>&#xa;            &lt;/tns3:descrizione>&#xa;        &lt;/tns3:book>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
-                    </tibex:inputBindings>
-                    <tibex:CallProcess
-                        subProcessName="book.jdbc.GetISBN" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
-                </tibex:extActivity>
-            </bpws:extensionActivity>
-            <bpws:extensionActivity>
-                <tibex:extActivity inputVariable="SaveUserBook-input"
-                    name="SaveUserBook"
-                    tibex:xpdlId="5ff8e7b5-8b29-43b2-bf27-f20dd5902890"
-                    type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
-                    <bpws:targets>
-                        <bpws:target linkName="GetISBNBookToCallProcess"/>
-                    </bpws:targets>
-                    <bpws:sources>
-                        <bpws:source linkName="SaveUserBookToCallProcess"/>
-                    </bpws:sources>
-                    <tibex:inputBindings>
-                        <tibex:inputBinding coercion=""
-                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns3=&quot;http://www.example.com/namespaces/tns/1664436339458&quot; xmlns:tns4=&quot;http://www.libraryservice.com/userBook/v1&quot; xmlns:tns1=&quot;http://www.libraryservice.com/xmlns/user/v1&quot; xmlns:tns2=&quot;http://www.libraryservice.com/requestUserBook/v1&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;Start&quot;/>&#xa;    &lt;xsl:param name=&quot;GetIdUser&quot;/>&#xa;    &lt;xsl:param name=&quot;GetISBNBook&quot;/>&#xa;    &lt;xsl:template name=&quot;SaveUserBook-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns4:userBookData>&#xa;            &lt;tns4:isbn_libro>&#xa;                &lt;xsl:value-of select=&quot;$GetISBNBook/tns3:isbn&quot;/>&#xa;            &lt;/tns4:isbn_libro>&#xa;            &lt;tns4:id_utente>&#xa;                &lt;xsl:value-of select=&quot;$GetIdUser/tns1:id&quot;/>&#xa;            &lt;/tns4:id_utente>&#xa;            &lt;tns4:stato>&#xa;                &lt;xsl:value-of select=&quot;$Start/tns2:stato&quot;/>&#xa;            &lt;/tns4:stato>&#xa;            &lt;tns4:note>&#xa;                &lt;xsl:value-of select=&quot;$Start/tns2:note&quot;/>&#xa;            &lt;/tns4:note>&#xa;        &lt;/tns4:userBookData>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
-                    </tibex:inputBindings>
-                    <tibex:CallProcess
-                        subProcessName="userBook.jdbc.SaveUserBook" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
-                </tibex:extActivity>
+                    <tibex:config>
+                        <bwext:BWActivity
+                            activityTypeID="bw.jdbc.JDBCQuery"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:jdbcPalette="http://ns.tibco.com/bw/palette/jdbc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/jdbc#//JDBCQueryActivity"/>
+                                    <value maxRows="100"
+                                    sharedResourceProperty="jdbcProperty"
+                                    sqlStatement="SELECT * from recensioni WHERE id =  ?"
+                                    timeout="10" xsi:type="jdbcPalette:JDBCQueryActivity">
+                                    <PreparedParameters DataType="4"
+                                    DataTypeDisplayValue="INTEGER" ParameterName="id"/>
+                                    <columnMetadata columnIndex="1"
+                                    columnName="id" dataType="4" typeName="serial"/>
+                                    <columnMetadata columnIndex="2"
+                                    columnName="isbn_libro"
+                                    dataType="12"
+                                    status="OptionalElement" typeName="varchar"/>
+                                    <columnMetadata columnIndex="3"
+                                    columnName="id_utente"
+                                    dataType="4"
+                                    status="OptionalElement" typeName="int4"/>
+                                    <columnMetadata columnIndex="4"
+                                    columnName="stelle"
+                                    dataType="4"
+                                    status="OptionalElement" typeName="int4"/>
+                                    <columnMetadata columnIndex="5"
+                                    columnName="titolo"
+                                    dataType="12"
+                                    status="OptionalElement" typeName="varchar"/>
+                                    <columnMetadata columnIndex="6"
+                                    columnName="commento"
+                                    dataType="12"
+                                    status="OptionalElement" typeName="varchar"/>
+                                    </value>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:config>
+                </tibex:activityExtension>
             </bpws:extensionActivity>
             <bpws:extensionActivity>
                 <tibex:activityExtension inputVariable="Log1-input"
                     name="Log1"
-                    tibex:xpdlId="0fdfa023-7cc9-4110-979d-d43fe0c588fc" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    tibex:xpdlId="6147491c-55e5-481f-a839-3f19e4152661" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
                     <bpws:targets>
-                        <bpws:target linkName="GetIdUserBookToLog1"/>
+                        <bpws:target linkName="JDBCQueryToLog1"/>
                     </bpws:targets>
                     <bpws:sources>
                         <bpws:source linkName="Log1ToEnd"/>
                     </bpws:sources>
                     <tibex:inputBindings>
                         <tibex:inputBinding
-                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; version=&quot;2.0&quot;>&lt;xsl:template name=&quot;Log1-input&quot; match=&quot;/&quot;>&lt;tns:ActivityInput>&lt;message>&lt;xsl:value-of select=&quot;&amp;quot;Processo AddUserBook finito&amp;quot;&quot;/>&lt;/message>&lt;/tns:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; version=&quot;2.0&quot;>&lt;xsl:template name=&quot;Log1-input&quot; match=&quot;/&quot;>&lt;tns:ActivityInput>&lt;message>&lt;xsl:value-of select=&quot;&amp;quot;Acquisiti dati recensione&amp;quot;&quot;/>&lt;/message>&lt;/tns:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                     </tibex:inputBindings>
                     <tibex:config>
                         <bwext:BWActivity
@@ -945,25 +953,6 @@
                         </bwext:BWActivity>
                     </tibex:config>
                 </tibex:activityExtension>
-            </bpws:extensionActivity>
-            <bpws:extensionActivity>
-                <tibex:extActivity inputVariable="GetIdUserBook-input"
-                    name="GetIdUserBook" outputVariable="GetIdUserBook"
-                    tibex:xpdlId="d7c16b72-58ec-49e5-bc49-f0e61b682441"
-                    type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
-                    <bpws:targets>
-                        <bpws:target linkName="SaveUserBookToCallProcess"/>
-                    </bpws:targets>
-                    <bpws:sources>
-                        <bpws:source linkName="GetIdUserBookToLog1"/>
-                    </bpws:sources>
-                    <tibex:inputBindings>
-                        <tibex:inputBinding coercion=""
-                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://www.libraryservice.com/xmlns/user/v1&quot; xmlns:tns4=&quot;http://www.libraryservice.com/userBook/v1&quot; xmlns:tns3=&quot;http://www.example.com/namespaces/tns/1664436339458&quot; xmlns:tns2=&quot;http://www.libraryservice.com/requestUserBook/v1&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;Start&quot;/>&#xa;    &lt;xsl:param name=&quot;GetIdUser&quot;/>&#xa;    &lt;xsl:param name=&quot;GetISBNBook&quot;/>&#xa;    &lt;xsl:template name=&quot;GetIdUserBook-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns4:userBookData>&#xa;            &lt;tns4:isbn_libro>&#xa;                &lt;xsl:value-of select=&quot;$GetISBNBook/tns3:isbn&quot;/>&#xa;            &lt;/tns4:isbn_libro>&#xa;            &lt;tns4:id_utente>&#xa;                &lt;xsl:value-of select=&quot;$GetIdUser/tns1:id&quot;/>&#xa;            &lt;/tns4:id_utente>&#xa;            &lt;tns4:stato>&#xa;                &lt;xsl:value-of select=&quot;$Start/tns2:stato&quot;/>&#xa;            &lt;/tns4:stato>&#xa;            &lt;tns4:note>&#xa;                &lt;xsl:value-of select=&quot;$Start/tns2:note&quot;/>&#xa;            &lt;/tns4:note>&#xa;        &lt;/tns4:userBookData>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
-                    </tibex:inputBindings>
-                    <tibex:CallProcess
-                        subProcessName="userBook.jdbc.GetIdUserBook" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
-                </tibex:extActivity>
             </bpws:extensionActivity>
         </bpws:flow>
     </bpws:scope>

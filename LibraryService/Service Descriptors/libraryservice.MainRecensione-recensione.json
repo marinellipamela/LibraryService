@@ -1,0 +1,115 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "recensione",
+    "description" : "recensione service"
+  },
+  "host" : "0.0.0.0:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/recensione/v1" : {
+      "post" : {
+        "summary" : "postRecensione",
+        "description" : "postRecensione",
+        "operationId" : "post-recensione-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/recensioneDataRequest"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a integer to be returned",
+            "schema" : {
+              "type" : "integer"
+            },
+            "headers" : { }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "/recensione/{id}/v1" : {
+      "get" : {
+        "summary" : "getRecensione",
+        "description" : "getRecensione",
+        "operationId" : "get-recensione-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a recensioneDataRequest to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/recensioneDataRequest"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "deleteRecensione",
+        "description" : "deleteRecensione",
+        "operationId" : "delete-recensione-v1",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "recensioneDataRequest" : {
+      "type" : "object",
+      "required" : [ "commento", "titoloCommento", "email", "stelle", "titoloLibro" ],
+      "properties" : {
+        "email" : {
+          "type" : "string"
+        },
+        "titoloLibro" : {
+          "type" : "string"
+        },
+        "stelle" : {
+          "type" : "integer"
+        },
+        "titoloCommento" : {
+          "type" : "string"
+        },
+        "commento" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

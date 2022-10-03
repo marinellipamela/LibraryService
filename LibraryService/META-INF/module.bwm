@@ -96,6 +96,90 @@
     </scaext:binding>
     <scact:bindingAdjunct xmi:id="_0MybPD_5Ee2Jhry2YvJa_A" bindingName="RestService6"/>
   </sca:service>
+  <sca:service xmi:id="_vmd1skAMEe2Jhry2YvJa_A" name="userbook-v11" promote="ComponentMainUserBook/userbook-v11">
+    <sca:interface.wsdl xmi:id="_vmd1tkAMEe2Jhry2YvJa_A" interface="http://xmlns.example.com/20220929115536PLT#wsdl.interface(userbook-v11)" scaext:wsdlLocation="../Processes/libraryservice/MainUserBook.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_vmd1t0AMEe2Jhry2YvJa_A" name="RestService1" path="/userbook/{id}/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="userBook" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainUserBook-userBook.json">
+      <operation xmi:id="_vmd1uUAMEe2Jhry2YvJa_A" operationName="get" nickname="get-userbook-v1" httpMethod="GET" notes="getUserBook" responseStyle="element" outputPartName="ResponseUserBook">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_vmd1ukAMEe2Jhry2YvJa_A" operationName="put" nickname="put-userbook-v1" httpMethod="PUT" notes="putUserBook" responseStyle="element" requestStyle="element" outputPartName="msg">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_vmd1u0AMEe2Jhry2YvJa_A" operationName="delete" nickname="delete-userbook-v1" httpMethod="DELETE" notes="deleteUserBook" responseStyle="element" outputPartName="msg">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_vm6hoEAMEe2Jhry2YvJa_A">
+        <parameterMapping xmi:id="_vm6hoUAMEe2Jhry2YvJa_A" parameterName="id" parameterType="Path" required="true"/>
+      </parameters>
+      <advancedConfig xmi:id="_vmd1uEAMEe2Jhry2YvJa_A" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_vmd1vEAMEe2Jhry2YvJa_A" bindingName="RestService1"/>
+  </sca:service>
+  <sca:service xmi:id="_wGdakECfEe2pttrnk9RNPQ" name="kindbook-v1" promote="ComponentMainKindBook/kindbook-v1">
+    <sca:interface.wsdl xmi:id="_wGdalECfEe2pttrnk9RNPQ" interface="http://xmlns.example.com/20220930102258PLT#wsdl.interface(kindbook-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainKindBook.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_wGnLkECfEe2pttrnk9RNPQ" name="RestService7" path="/kindbook/{nome_genere}/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="kindBook" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainKindBook-kindBook.json">
+      <operation xmi:id="_wGnLkkCfEe2pttrnk9RNPQ" operationName="get" nickname="get-kindbook-v1" httpMethod="GET" notes="getKindBook" responseStyle="element" outputPartName="ResponseListaLibri">
+        <responseStatus xmi:id="_ym2TsECfEe2pttrnk9RNPQ" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <responseStatus xmi:id="_yrotEECfEe2pttrnk9RNPQ" statusCode="500" reasonPhrase="Internal Server Error" dataType="string"/>
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_wGw8kECfEe2pttrnk9RNPQ">
+        <parameterMapping xmi:id="_wGw8kUCfEe2pttrnk9RNPQ" parameterName="nome_genere" parameterType="Path" required="true"/>
+      </parameters>
+      <advancedConfig xmi:id="_wGnLkUCfEe2pttrnk9RNPQ" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_wGnLk0CfEe2pttrnk9RNPQ" bindingName="RestService7"/>
+  </sca:service>
+  <sca:service xmi:id="_BYrsIkCnEe2pttrnk9RNPQ" name="recensione-v1" promote="ComponentMainRecensione/recensione-v1">
+    <sca:interface.wsdl xmi:id="_BYrsJkCnEe2pttrnk9RNPQ" interface="http://xmlns.example.com/20220930120034PLT#wsdl.interface(recensione-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainRecensione.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_BYsTMECnEe2pttrnk9RNPQ" name="RestService8" path="/recensione/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="recensione" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainRecensione-recensione.json">
+      <operation xmi:id="_BYwkoECnEe2pttrnk9RNPQ" operationName="post" nickname="post-recensione-v1" httpMethod="POST" notes="postRecensione" responseStyle="element" requestStyle="element" outputPartName="ResponseIdRec">
+        <responseStatus xmi:id="_PGEpMECnEe2pttrnk9RNPQ" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <responseStatus xmi:id="_PKkHoECnEe2pttrnk9RNPQ" statusCode="500" reasonPhrase="Internal Server Error" dataType="string"/>
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_BYxLsECnEe2pttrnk9RNPQ"/>
+      <advancedConfig xmi:id="_BYsTMUCnEe2pttrnk9RNPQ" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_BYwkoUCnEe2pttrnk9RNPQ" bindingName="RestService8"/>
+  </sca:service>
+  <sca:service xmi:id="_B7RnkEDCEe2pttrnk9RNPQ" name="recensione-v11" promote="ComponentMainRecensione/recensione-v11">
+    <sca:interface.wsdl xmi:id="_B7RnlEDCEe2pttrnk9RNPQ" interface="http://xmlns.example.com/20220930120034PLT#wsdl.interface(recensione-v12)" scaext:wsdlLocation="../Processes/libraryservice/MainRecensione.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_B7SOoEDCEe2pttrnk9RNPQ" name="RestService9" path="/recensione/{id}/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="recensione" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainRecensione-recensione.json">
+      <operation xmi:id="_B7XuMEDCEe2pttrnk9RNPQ" operationName="get" nickname="get-recensione-v1" httpMethod="GET" notes="getRecensione" responseStyle="element" outputPartName="item">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <operation xmi:id="_B7XuMUDCEe2pttrnk9RNPQ" operationName="delete" nickname="delete-recensione-v1" httpMethod="DELETE" notes="deleteRecensione" responseStyle="element" outputPartName="msg">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_B8ERwEDCEe2pttrnk9RNPQ">
+        <parameterMapping xmi:id="_B8ERwUDCEe2pttrnk9RNPQ" parameterName="id" parameterType="Path" required="true"/>
+      </parameters>
+      <advancedConfig xmi:id="_B7SOoUDCEe2pttrnk9RNPQ" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_B7XuMkDCEe2pttrnk9RNPQ" bindingName="RestService9"/>
+  </sca:service>
+  <sca:service xmi:id="_CMKUgkDIEe2pttrnk9RNPQ" name="genereautore-v1" promote="ComponentMainGenereAutore/genereautore-v1">
+    <sca:interface.wsdl xmi:id="_CMKUhkDIEe2pttrnk9RNPQ" interface="http://xmlns.example.com/20220930153449PLT#wsdl.interface(genereautore-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainGenereAutore.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_CMKUh0DIEe2pttrnk9RNPQ" name="RestService10" path="/genereautore/{nome_genere}/v1" docBasePath="http://localhost:7777/LibraryService" docResourcePath="genereAutore" basePath="/" connector="libraryservice.user" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/libraryservice.MainGenereAutore-genereAutore.json">
+      <operation xmi:id="_CMUFgEDIEe2pttrnk9RNPQ" operationName="get" nickname="get-genereautore-v1" httpMethod="GET" notes="getGenereAutore" responseStyle="element" outputPartName="item">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_CNETcEDIEe2pttrnk9RNPQ">
+        <parameterMapping xmi:id="_CNETcUDIEe2pttrnk9RNPQ" parameterName="nome_genere" parameterType="Path" required="true"/>
+      </parameters>
+      <advancedConfig xmi:id="_CMKUiEDIEe2pttrnk9RNPQ" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_CMUFgUDIEe2pttrnk9RNPQ" bindingName="RestService10"/>
+  </sca:service>
   <sca:property xmi:id="_homrAD8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho17kD8MEe23Zp_1GPXAKw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
   <sca:property xmi:id="_ho60ED8MEe23Zp_1GPXAKw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
@@ -137,6 +221,30 @@
     <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_3aRxET_cEe2Jhry2YvJa_A" processName="libraryservice.MainUserBook"/>
     <sca:service xmi:id="_dQ5GAD_fEe2Jhry2YvJa_A" name="userbook-v1">
       <sca:interface.wsdl xmi:id="_dQ5GAT_fEe2Jhry2YvJa_A" interface="http://xmlns.example.com/20220929115536PLT#wsdl.interface(userbook-v1)"/>
+    </sca:service>
+    <sca:service xmi:id="_vmd1sEAMEe2Jhry2YvJa_A" name="userbook-v11">
+      <sca:interface.wsdl xmi:id="_vmd1sUAMEe2Jhry2YvJa_A" interface="http://xmlns.example.com/20220929115536PLT#wsdl.interface(userbook-v11)" scaext:wsdlLocation="../Processes/libraryservice/MainUserBook.bwp"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_Fy8ZUECZEe2pttrnk9RNPQ" name="ComponentMainKindBook" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_Fy8ZUUCZEe2pttrnk9RNPQ" processName="libraryservice.MainKindBook"/>
+    <sca:service xmi:id="_wGUQoECfEe2pttrnk9RNPQ" name="kindbook-v1">
+      <sca:interface.wsdl xmi:id="_wGUQoUCfEe2pttrnk9RNPQ" interface="http://xmlns.example.com/20220930102258PLT#wsdl.interface(kindbook-v1)"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_uiiFgECmEe2pttrnk9RNPQ" name="ComponentMainRecensione" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_uiiFgUCmEe2pttrnk9RNPQ" processName="libraryservice.MainRecensione"/>
+    <sca:service xmi:id="_BYrsIECnEe2pttrnk9RNPQ" name="recensione-v1">
+      <sca:interface.wsdl xmi:id="_BYrsIUCnEe2pttrnk9RNPQ" interface="http://xmlns.example.com/20220930120034PLT#wsdl.interface(recensione-v1)"/>
+    </sca:service>
+    <sca:service xmi:id="_B7RAgEDCEe2pttrnk9RNPQ" name="recensione-v11">
+      <sca:interface.wsdl xmi:id="_B7RAgUDCEe2pttrnk9RNPQ" interface="http://xmlns.example.com/20220930120034PLT#wsdl.interface(recensione-v12)"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_p99LcEDEEe2pttrnk9RNPQ" name="ComponentMainGenereAutore" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_p99LcUDEEe2pttrnk9RNPQ" processName="libraryservice.MainGenereAutore"/>
+    <sca:service xmi:id="_CMKUgEDIEe2pttrnk9RNPQ" name="genereautore-v1">
+      <sca:interface.wsdl xmi:id="_CMKUgUDIEe2pttrnk9RNPQ" interface="http://xmlns.example.com/20220930153449PLT#wsdl.interface(genereautore-v1)" scaext:wsdlLocation="../Processes/libraryservice/MainGenereAutore.bwp"/>
     </sca:service>
   </sca:component>
 </sca:composite>
