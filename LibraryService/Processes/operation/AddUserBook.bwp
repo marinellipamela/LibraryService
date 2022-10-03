@@ -750,6 +750,8 @@
         <bpws:variable element="ns1:userBookData"
             name="SaveUserBook-input" sca-bpel:internal="true"/>
         <bpws:variable element="ns1:userBookID" name="GetIdUserBook" sca-bpel:internal="true"/>
+        <bpws:variable element="ns1:userBookData"
+            name="GetIdUserBook-input" sca-bpel:internal="true"/>
     </bpws:variables>
     <bpws:extensions>
         <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
@@ -945,8 +947,8 @@
                 </tibex:activityExtension>
             </bpws:extensionActivity>
             <bpws:extensionActivity>
-                <tibex:extActivity name="GetIdUserBook"
-                    outputVariable="GetIdUserBook"
+                <tibex:extActivity inputVariable="GetIdUserBook-input"
+                    name="GetIdUserBook" outputVariable="GetIdUserBook"
                     tibex:xpdlId="d7c16b72-58ec-49e5-bc49-f0e61b682441"
                     type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
                     <bpws:targets>

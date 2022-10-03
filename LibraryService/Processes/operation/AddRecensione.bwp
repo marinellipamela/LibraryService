@@ -748,6 +748,8 @@
         <bpws:variable element="ns:FaultDetail" name="FaultDetails" sca-bpel:internal="true"/>
         <bpws:variable element="ns0:idRecensione" name="End-input"
             sca-bpel:internal="true" tibex:parameter="out"/>
+        <bpws:variable element="ns0:recensioneDataID"
+            name="GetIRecensione-input" sca-bpel:internal="true"/>
     </bpws:variables>
     <bpws:extensions>
         <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
@@ -910,7 +912,8 @@
                 </tibex:extActivity>
             </bpws:extensionActivity>
             <bpws:extensionActivity>
-                <tibex:extActivity name="GetIRecensione"
+                <tibex:extActivity inputVariable="GetIRecensione-input"
+                    name="GetIRecensione"
                     outputVariable="GetIRecensione"
                     tibex:xpdlId="246cbd10-13d4-4057-b16a-6589dae2583f"
                     type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
@@ -920,6 +923,10 @@
                     <bpws:sources>
                         <bpws:source linkName="GetIRecensioneToLog1"/>
                     </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding coercion=""
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;http://www.example.com/namespaces/tns/1664436339458&quot; xmlns:tns=&quot;http://www.libraryservice.com/RequestRecensione/v1&quot; xmlns:tns1=&quot;http://www.libraryservice.com/xmlns/user/v1&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;Start&quot;/>&lt;xsl:param name=&quot;GetIdUser&quot;/>&lt;xsl:param name=&quot;GetISBN&quot;/>&lt;xsl:template name=&quot;GetIRecensione-input&quot; match=&quot;/&quot;>&lt;tns:recensioneDataID>&lt;tns:id_utente>&lt;xsl:value-of select=&quot;$GetIdUser/tns1:id&quot;/>&lt;/tns:id_utente>&lt;tns:isbn_libro>&lt;xsl:value-of select=&quot;$GetISBN/tns2:isbn&quot;/>&lt;/tns:isbn_libro>&lt;tns:stelle>&lt;xsl:value-of select=&quot;$Start/tns:stelle&quot;/>&lt;/tns:stelle>&lt;tns:titoloCommento>&lt;xsl:value-of select=&quot;$Start/tns:titoloCommento&quot;/>&lt;/tns:titoloCommento>&lt;tns:commento>&lt;xsl:value-of select=&quot;$Start/tns:commento&quot;/>&lt;/tns:commento>&lt;/tns:recensioneDataID>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
                     <tibex:CallProcess
                         subProcessName="recensione.GetIdRecensione" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
                 </tibex:extActivity>

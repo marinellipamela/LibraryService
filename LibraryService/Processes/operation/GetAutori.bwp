@@ -1068,9 +1068,7 @@
                     </tibex:config>
                 </tibex:activityExtension>
             </bpws:extensionActivity>
-            <bpws:scope name="Iterate" tibex:group="iterate"
-                tibex:indexOriginalName="index"
-                tibex:indexToGlobal="false" tibex:xpdlId="c0177e26-febf-4d88-af2b-3b53bddf6048">
+            <bpws:scope name="Iterate" tibex:group="iterate" tibex:xpdlId="c0177e26-febf-4d88-af2b-3b53bddf6048">
                 <bpws:targets>
                     <bpws:target linkName="GetIdAutoriToIterate"/>
                 </bpws:targets>
